@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.Order" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
+    <result column="transcation_sn" property="transcationSn" jdbcType="VARCHAR" />
+    <result column="order_name" property="orderName" jdbcType="VARCHAR" />
+    <result column="pay_type" property="payType" jdbcType="VARCHAR" />
+    <result column="order_price" property="orderPrice" jdbcType="VARCHAR" />
+    <result column="order_type" property="orderType" jdbcType="VARCHAR" />
+    <result column="is_pay" property="isPay" jdbcType="INTEGER" />
+    <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+    <result column="is_del" property="isDel" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uuid, order_sn, transcation_sn, order_name, pay_type, order_price, order_type, 
+    is_pay, user_code, is_del, create_date, update_date
+  </sql>
+  <select id="Order_getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hxs_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="Order_deleteById" parameterType="java.lang.Long" >
+    delete from hxs_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="Order_save" keyProperty="id" useGeneratedKeys="true">
+    insert into hxs_order (uuid, order_sn, 
+      transcation_sn, order_name, pay_type, 
+      order_price, order_type, is_pay, 
+      user_code, is_del, create_date, 
+      update_date)
+    values (#{uuid,jdbcType=VARCHAR}, #{orderSn,jdbcType=VARCHAR}, 
+      #{transcationSn,jdbcType=VARCHAR}, #{orderName,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR}, 
+      #{orderPrice,jdbcType=VARCHAR}, #{orderType,jdbcType=VARCHAR}, #{isPay,jdbcType=INTEGER}, 
+      #{userCode,jdbcType=VARCHAR}, #{isDel,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.Order" >
+    insert into hxs_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="orderSn != null" >
+        order_sn,
+      </if>
+      <if test="transcationSn != null" >
+        transcation_sn,
+      </if>
+      <if test="orderName != null" >
+        order_name,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="orderPrice != null" >
+        order_price,
+      </if>
+      <if test="orderType != null" >
+        order_type,
+      </if>
+      <if test="isPay != null" >
+        is_pay,
+      </if>
+      <if test="userCode != null" >
+        user_code,
+      </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSn != null" >
+        #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="transcationSn != null" >
+        #{transcationSn,jdbcType=VARCHAR},
+      </if>
+      <if test="orderName != null" >
+        #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPrice != null" >
+        #{orderPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="isPay != null" >
+        #{isPay,jdbcType=INTEGER},
+      </if>
+      <if test="userCode != null" >
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eeduspace.challenge.persist.po.Order" >
+    update hxs_order
+    <set >
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderSn != null" >
+        order_sn = #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="transcationSn != null" >
+        transcation_sn = #{transcationSn,jdbcType=VARCHAR},
+      </if>
+      <if test="orderName != null" >
+        order_name = #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="orderPrice != null" >
+        order_price = #{orderPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null" >
+        order_type = #{orderType,jdbcType=VARCHAR},
+      </if>
+      <if test="isPay != null" >
+        is_pay = #{isPay,jdbcType=INTEGER},
+      </if>
+      <if test="userCode != null" >
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="Order_update"  >
+    update hxs_order
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      order_sn = #{orderSn,jdbcType=VARCHAR},
+      transcation_sn = #{transcationSn,jdbcType=VARCHAR},
+      order_name = #{orderName,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=VARCHAR},
+      order_price = #{orderPrice,jdbcType=VARCHAR},
+      order_type = #{orderType,jdbcType=VARCHAR},
+      is_pay = #{isPay,jdbcType=INTEGER},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <sql id="Order_where_sql">
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="uuid != null">
+			and uuid = #{uuid}
+		</if>
+		<if test="orderSn != null">
+			and order_sn = #{orderSn}
+		</if>
+		<if test="transcationSn != null">
+			and transcation_sn = #{transcationSn}
+		</if>
+		<if test="orderName != null">
+			and order_name = #{orderName}
+		</if>
+		<if test="payType != null">
+			and pay_type = #{payType}
+		</if>
+		<if test="orderPrice != null">
+			and order_price = #{orderPrice}
+		</if>
+		<if test="orderType != null">
+			and order_type = #{orderType}
+		</if>
+		<if test="isPay != null">
+			and is_pay = #{isPay}
+		</if>
+		<if test="userCode != null">
+			and user_code = #{userCode}
+		</if>
+		<if test="isDel != null">
+			and is_del = #{isDel}
+		</if>
+		<if test="createDate != null">
+			and create_date = #{createDate}
+		</if>
+		<if test="updateDate != null">
+			and  update_date= #{updateDate}
+		</if>
+	</sql>
+     <select id="Order_findByPager" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM hxs_order
+		<where>
+			<include refid="Order_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+		<if test="orderProperty != null">
+			order by ${orderProperty} ${orderDirection}
+		</if>
+		<if test="start != null ">
+			<if test="start >= 0">
+				limit #{start}, #{limit}
+			</if>
+		</if>
+	</select>
+
+	<select id="Order_findByPager_count" resultType="java.lang.Long">
+		select count(id) from hxs_order
+		<where>
+			<include refid="Order_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+	</select>
+   
+  
+  
+  
+  
+  
+</mapper>

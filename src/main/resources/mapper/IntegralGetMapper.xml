@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.IntegralGetMapper" >
+  <resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.IntegralGet" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+    <result column="reward_name" property="rewardName" jdbcType="VARCHAR" />
+    <result column="reward_integral" property="rewardIntegral" jdbcType="DOUBLE" />
+    <result column="reward_type" property="rewardType" jdbcType="VARCHAR" />
+    <result column="reward_source_uuid" property="rewardSourceUuid" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uuid, user_code, reward_name, reward_integral, reward_type, reward_source_uuid, 
+    create_date, update_date
+  </sql>
+  <select id="IntegralGet_getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from integral_get
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="IntegralGet_deleteById" parameterType="java.lang.Long" >
+    delete from integral_get
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="IntegralGet_save" parameterType="com.eeduspace.challenge.persist.po.IntegralGet" >
+    insert into integral_get (id, uuid, user_code, 
+      reward_name, reward_integral, reward_type, 
+      reward_source_uuid, create_date, update_date
+      )
+    values (#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, 
+      #{rewardName,jdbcType=VARCHAR}, #{rewardIntegral,jdbcType=DOUBLE}, #{rewardType,jdbcType=VARCHAR}, 
+      #{rewardSourceUuid,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.IntegralGet" >
+    insert into integral_get
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="userCode != null" >
+        user_code,
+      </if>
+      <if test="rewardName != null" >
+        reward_name,
+      </if>
+      <if test="rewardIntegral != null" >
+        reward_integral,
+      </if>
+      <if test="rewardType != null" >
+        reward_type,
+      </if>
+      <if test="rewardSourceUuid != null" >
+        reward_source_uuid,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null" >
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardName != null" >
+        #{rewardName,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardIntegral != null" >
+        #{rewardIntegral,jdbcType=DOUBLE},
+      </if>
+      <if test="rewardType != null" >
+        #{rewardType,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardSourceUuid != null" >
+        #{rewardSourceUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="IntegralGet_update" parameterType="com.eeduspace.challenge.persist.po.IntegralGet" >
+    update integral_get
+    <set >
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null" >
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardName != null" >
+        reward_name = #{rewardName,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardIntegral != null" >
+        reward_integral = #{rewardIntegral,jdbcType=DOUBLE},
+      </if>
+      <if test="rewardType != null" >
+        reward_type = #{rewardType,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardSourceUuid != null" >
+        reward_source_uuid = #{rewardSourceUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.IntegralGet" >
+    update integral_get
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      reward_name = #{rewardName,jdbcType=VARCHAR},
+      reward_integral = #{rewardIntegral,jdbcType=DOUBLE},
+      reward_type = #{rewardType,jdbcType=VARCHAR},
+      reward_source_uuid = #{rewardSourceUuid,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+    <sql id="IntegralGet_where_sql">
+        <if test="uuid != null" >
+            and uuid = #{uuid,jdbcType=VARCHAR}
+        </if>
+        <if test="userCode != null" >
+            and user_code = #{userCode,jdbcType=VARCHAR}
+        </if>
+        <if test="rewardName != null" >
+            and  reward_name = #{rewardName,jdbcType=VARCHAR}
+        </if>
+        <if test="rewardIntegral != null" >
+            and reward_integral = #{rewardIntegral,jdbcType=DOUBLE}
+        </if>
+        <if test="rewardType != null" >
+            and reward_type = #{rewardType,jdbcType=VARCHAR}
+        </if>
+        <if test="rewardSourceUuid != null" >
+            and reward_source_uuid = #{rewardSourceUuid,jdbcType=VARCHAR}
+        </if>
+        <if test="createDate != null" >
+            and create_date = #{createDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateDate != null" >
+            and update_date = #{updateDate,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+
+    <select id="IntegralGet_findByPager" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM integral_get
+        <where>
+            <include refid="IntegralGet_where_sql" />
+            <if test="searchProperty != null">
+                ${searchProperty} = #{searchValue}
+            </if>
+        </where>
+        <if test="orderProperty != null">
+            order by ${orderProperty} ${orderDirection}
+        </if>
+        <if test="start != null ">
+            <if test="start >= 0">
+                limit #{start}, #{limit}
+            </if>
+        </if>
+    </select>
+</mapper>

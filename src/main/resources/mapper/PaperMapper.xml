@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.PaperMapper" >
+  <resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.Paper" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="subject_code" property="subjectCode" jdbcType="VARCHAR" />
+    <result column="grade_code" property="gradeCode" jdbcType="VARCHAR" />
+    <result column="unit_code" property="unitCode" jdbcType="VARCHAR" />
+    <result column="volume_code" property="volumeCode" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uuid, subject_code, grade_code, unit_code, volume_code, create_date, update_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from paper_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from paper_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="Paper_save" parameterType="com.eeduspace.challenge.persist.po.Paper" >
+    insert into paper_info (id, uuid, subject_code, 
+      grade_code, unit_code, volume_code, 
+      create_date, update_date)
+    values (#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR}, #{subjectCode,jdbcType=VARCHAR}, 
+      #{gradeCode,jdbcType=VARCHAR}, #{unitCode,jdbcType=VARCHAR}, #{volumeCode,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=VARCHAR}, #{updateDate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.Paper" >
+    insert into paper_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="subjectCode != null" >
+        subject_code,
+      </if>
+      <if test="gradeCode != null" >
+        grade_code,
+      </if>
+      <if test="unitCode != null" >
+        unit_code,
+      </if>
+      <if test="volumeCode != null" >
+        volume_code,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectCode != null" >
+        #{subjectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="gradeCode != null" >
+        #{gradeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="unitCode != null" >
+        #{unitCode,jdbcType=VARCHAR},
+      </if>
+      <if test="volumeCode != null" >
+        #{volumeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="Paper_update" parameterType="com.eeduspace.challenge.persist.po.Paper" >
+    update paper_info
+    <set >
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectCode != null" >
+        subject_code = #{subjectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="gradeCode != null" >
+        grade_code = #{gradeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="unitCode != null" >
+        unit_code = #{unitCode,jdbcType=VARCHAR},
+      </if>
+      <if test="volumeCode != null" >
+        volume_code = #{volumeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.Paper" >
+    update paper_info
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      subject_code = #{subjectCode,jdbcType=VARCHAR},
+      grade_code = #{gradeCode,jdbcType=VARCHAR},
+      unit_code = #{unitCode,jdbcType=VARCHAR},
+      volume_code = #{volumeCode,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+  
+  
+  	<sql id="Paper_where_sql">
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		 <if test="uuid != null" >
+       and uuid = #{uuid}
+      </if>
+      <if test="subjectCode != null" >
+       and subject_code = #{subjectCode}
+      </if>
+      <if test="gradeCode != null" >
+       and grade_code = #{gradeCode}
+      </if>
+      <if test="unitCode != null" >
+       and unit_code = #{unitCode}
+      </if>
+      <if test="volumeCode != null" >
+       and volume_code = #{volumeCode}
+      </if>
+      <if test="createDate != null" >
+      and  create_date = #{createDate}
+      </if>
+      <if test="updateDate != null" >
+       and update_date = #{updateDate}
+      </if>
+	</sql>
+
+	<select id="Paper_findByPager" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM paper_info
+		<where>
+			<include refid="Paper_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+		<if test="orderProperty != null">
+			order by ${orderProperty} ${orderDirection}
+		</if>
+		<if test="start != null ">
+			<if test="start >= 0">
+				limit #{start}, #{limit}
+			</if>
+		</if>
+	</select>
+
+	<select id="Paper_findByPager_count" resultType="java.lang.Long">
+		select count(id) from paper_info
+		<where>
+			<include refid="Paper_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+	</select>
+	
+</mapper>

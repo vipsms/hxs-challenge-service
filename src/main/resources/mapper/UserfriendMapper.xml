@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.UserFriendMapper">
+	<resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.UserFriend">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="my_user_code" property="myUserCode" jdbcType="VARCHAR" />
+		<result column="friend_code" property="friendCode" jdbcType="VARCHAR" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="BaseDetailResultMap" type="com.eeduspace.challenge.model.UserModel">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="user_code" property="userCode" jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="mobile" property="mobile" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="is_black" property="isBlack" jdbcType="INTEGER" />
+		<result column="user_online_state" property="userOnlineState"
+			jdbcType="INTEGER" />
+		<result column="is_vip" property="isVip" jdbcType="INTEGER" />
+		<result column="vip_start_date" property="vipStartDate"
+			jdbcType="TIMESTAMP" />
+		<result column="vip_end_date" property="vipEndDate" jdbcType="TIMESTAMP" />
+		<result column="register_source" property="registerSource"
+			jdbcType="VARCHAR" />
+		<result column="fight_value" property="fightValue" jdbcType="DOUBLE" />
+		<result column="user_points" property="userPoints" jdbcType="DOUBLE" />
+		<result column="first" property="first" jdbcType="BIGINT" />
+		<result column="second" property="second" jdbcType="BIGINT" />
+		<result column="third" property="third" jdbcType="BIGINT" />
+		<result column="equipment_type" property="equipmentType" jdbcType="VARCHAR" />
+		<result column="user_info_degree" property="userInfoDegree"
+			jdbcType="INTEGER" />
+		<result column="channel_source" property="channelSource"
+			jdbcType="VARCHAR" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+
+		<result column="school" property="school" jdbcType="VARCHAR" />
+		<result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="VARCHAR" />
+		<result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, my_user_code, friend_code, create_date, update_date
+	</sql>
+	<select id="UserFriend_getById" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from user_friend
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+
+	<delete id="UserFriend_deleteById" parameterType="java.lang.Long">
+		delete from
+		user_friend
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="UserFriend_save" parameterType="com.eeduspace.challenge.persist.po.UserFriend"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into user_friend (id,
+		my_user_code, friend_code,
+		create_date, update_date)
+		values
+		(#{id,jdbcType=BIGINT}, #{myUserCode,jdbcType=VARCHAR},
+		#{friendCode,jdbcType=VARCHAR},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{updateDate,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.UserFriend"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into user_friend
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="myUserCode != null">
+				my_user_code,
+			</if>
+			<if test="friendCode != null">
+				friend_code,
+			</if>
+			<if test="createDate != null">
+				create_date,
+			</if>
+			<if test="updateDate != null">
+				update_date,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="myUserCode != null">
+				#{myUserCode,jdbcType=VARCHAR},
+			</if>
+			<if test="friendCode != null">
+				#{friendCode,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="UserFriend_update" parameterType="com.eeduspace.challenge.persist.po.UserFriend">
+		update user_friend
+		<set>
+			<if test="myUserCode != null">
+				my_user_code = #{myUserCode,jdbcType=VARCHAR},
+			</if>
+			<if test="friendCode != null">
+				friend_code = #{friendCode,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				create_date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				update_date = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.UserFriend">
+		update user_friend
+		set my_user_code = #{myUserCode,jdbcType=VARCHAR},
+		friend_code =
+		#{friendCode,jdbcType=VARCHAR},
+		create_date =
+		#{createDate,jdbcType=TIMESTAMP},
+		update_date =
+		#{updateDate,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<sql id="UserFriend_where_sql">
+
+		<if test="myUserCode != null">
+			and my_user_code = #{myUserCode,jdbcType=VARCHAR}
+		</if>
+		<if test="friendCode != null">
+			and friend_code = #{friendCode,jdbcType=VARCHAR}
+		</if>
+		<if test="createDate != null">
+			and create_date = #{createDate,jdbcType=TIMESTAMP}
+		</if>
+		<if test="updateDate != null">
+			and update_date = #{updateDate,jdbcType=TIMESTAMP}
+		</if>
+	</sql>
+
+	<select id="UserFriend_findByPager" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM user_friend
+		<where>
+			<include refid="UserFriend_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+		<if test="orderProperty != null">
+			order by ${orderProperty} ${orderDirection}
+		</if>
+		<if test="start != null ">
+			<if test="start >= 0">
+				limit #{start}, #{limit}
+			</if>
+		</if>
+	</select>
+
+
+	<sql id="Base_Detail_Column_List">
+		u.user_code, user_name, mobile, email, is_black,
+		user_online_state, is_vip,
+		vip_start_date, vip_end_date,
+		register_source, fight_value,
+		user_points,
+		equipment_type,
+		user_info_degree,head_img_url, sex, nick_name
+	</sql>
+	<select id="UserFriend_findFriendByUserCode" resultMap="BaseDetailResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Detail_Column_List" />
+		from user u, user_info ud
+		where u.user_code=ud.user_code and
+		u.user_code in (select uf.friend_code from user_friend uf where
+		uf.my_user_code=#{userCode,jdbcType=VARCHAR})
+	</select>
+
+
+	<!-- 好友对战好友排行榜 -->
+	<select id="friend_battle_rank" resultMap="FriendBattleModel">
+		SELECT
+		info.nick_name,info.head_img_url,u.user_code,w.week_fight_value,
+		u.user_online_state,u.is_vip,u.fight_value,u.vip_start_date,u.vip_end_date
+		FROM `user` u,user_friend
+		uf,user_info info,weekly_ranking w where
+		u.user_code=uf.friend_code and
+		info.user_code=u.user_code and
+		w.user_code=u.user_code and
+		uf.my_user_code=#{userCode} ORDER BY
+		w.week_fight_value DESC ,u.create_date ASC LIMIT
+		#{start},#{item}
+
+	</select>
+
+	<resultMap type="com.eeduspace.challenge.model.battle.FriendBattleRankModel"
+		id="FriendBattleModel">
+		<result column="user_code" property="userCode" />
+		<result column="nick_name" property="nickName" />
+		<result column="head_img_url" property="headImgUrl" />
+		<result column="user_online_state" property="userOnlineState" />
+		<result column="fight_value" property="fightValue" />
+		<result column="week_fight_value" property="weekFightValue" />
+		<result column="is_vip" property="isVip" />
+		<result column="vip_start_date" property="vipStartDate" />
+		<result column="vip_end_date" property="vipEndDate" />
+	</resultMap>
+	
+	<select id="getFriendCount" parameterType="java.lang.String" resultType="java.lang.Long">
+		select count(*)
+		from user_friend
+		where my_user_code = #{userCode}
+	</select>
+</mapper>

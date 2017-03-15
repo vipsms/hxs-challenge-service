@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.UserAnswerMapper">
+	<resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.UserAnswer">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="uuid" property="uuid" jdbcType="VARCHAR" />
+		<result column="user_code" property="userCode" jdbcType="VARCHAR" />
+		<result column="fight_record_uuid" property="fightRecordUuid"
+			jdbcType="VARCHAR" />
+		<result column="fight_type" property="fightType" jdbcType="INTEGER" />
+		<result column="is_right" property="isRight" jdbcType="INTEGER" />
+		<result column="score" property="score" jdbcType="DOUBLE" />
+		<result column="use_time" property="useTime" jdbcType="DOUBLE" />
+		<result column="question_uuid" property="questionUuid"
+			jdbcType="VARCHAR" />
+		<result column="user_option" property="userOption" jdbcType="VARCHAR" />
+		<result column="right_option" property="rightOption" jdbcType="VARCHAR" />
+		<result column="paper_uuid" property="paperUuid" jdbcType="VARCHAR" />
+		<result column="question_sn" property="questionSn" jdbcType="VARCHAR" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, uuid, user_code, fight_record_uuid, fight_type,
+		is_right, score,
+		use_time, question_uuid,
+		user_option, right_option,
+		paper_uuid, question_sn, create_date, update_date
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from user_answer
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		user_answer
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="UserAnswer_save" parameterType="com.eeduspace.challenge.persist.po.UserAnswer">
+		insert into
+		user_answer (id, uuid, user_code,
+		fight_record_uuid, fight_type,
+		is_right,
+		score, use_time, question_uuid,
+		user_option, right_option,
+		paper_uuid,
+		question_sn, create_date, update_date
+		)
+		values
+		(#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR},
+		#{userCode,jdbcType=VARCHAR},
+		#{fightRecordUuid,jdbcType=VARCHAR},
+		#{fightType,jdbcType=INTEGER}, #{isRight,jdbcType=INTEGER},
+		#{score,jdbcType=DOUBLE}, #{useTime,jdbcType=DOUBLE},
+		#{questionUuid,jdbcType=VARCHAR},
+		#{userOption,jdbcType=VARCHAR},
+		#{rightOption,jdbcType=VARCHAR}, #{paperUuid,jdbcType=VARCHAR},
+		#{questionSn,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+		#{updateDate,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.UserAnswer">
+		insert into user_answer
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="uuid != null">
+				uuid,
+			</if>
+			<if test="userCode != null">
+				user_code,
+			</if>
+			<if test="fightRecordUuid != null">
+				fight_record_uuid,
+			</if>
+			<if test="fightType != null">
+				fight_type,
+			</if>
+			<if test="isRight != null">
+				is_right,
+			</if>
+			<if test="score != null">
+				score,
+			</if>
+			<if test="useTime != null">
+				use_time,
+			</if>
+			<if test="questionUuid != null">
+				question_uuid,
+			</if>
+			<if test="userOption != null">
+				user_option,
+			</if>
+			<if test="rightOption != null">
+				right_option,
+			</if>
+			<if test="paperUuid != null">
+				paper_uuid,
+			</if>
+			<if test="questionSn != null">
+				question_sn,
+			</if>
+			<if test="createDate != null">
+				create_date,
+			</if>
+			<if test="updateDate != null">
+				update_date,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="uuid != null">
+				#{uuid,jdbcType=VARCHAR},
+			</if>
+			<if test="userCode != null">
+				#{userCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fightRecordUuid != null">
+				#{fightRecordUuid,jdbcType=VARCHAR},
+			</if>
+			<if test="fightType != null">
+				#{fightType,jdbcType=INTEGER},
+			</if>
+			<if test="isRight != null">
+				#{isRight,jdbcType=INTEGER},
+			</if>
+			<if test="score != null">
+				#{score,jdbcType=DOUBLE},
+			</if>
+			<if test="useTime != null">
+				#{useTime,jdbcType=DOUBLE},
+			</if>
+			<if test="questionUuid != null">
+				#{questionUuid,jdbcType=VARCHAR},
+			</if>
+			<if test="userOption != null">
+				#{userOption,jdbcType=VARCHAR},
+			</if>
+			<if test="rightOption != null">
+				#{rightOption,jdbcType=VARCHAR},
+			</if>
+			<if test="paperUuid != null">
+				#{paperUuid,jdbcType=VARCHAR},
+			</if>
+			<if test="questionSn != null">
+				#{questionSn,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="UserAnswer_update" parameterType="com.eeduspace.challenge.persist.po.UserAnswer">
+		update user_answer
+		<set>
+			<if test="uuid != null">
+				uuid = #{uuid,jdbcType=VARCHAR},
+			</if>
+			<if test="userCode != null">
+				user_code = #{userCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fightRecordUuid != null">
+				fight_record_uuid = #{fightRecordUuid,jdbcType=VARCHAR},
+			</if>
+			<if test="fightType != null">
+				fight_type = #{fightType,jdbcType=INTEGER},
+			</if>
+			<if test="isRight != null">
+				is_right = #{isRight,jdbcType=INTEGER},
+			</if>
+			<if test="score != null">
+				score = #{score,jdbcType=DOUBLE},
+			</if>
+			<if test="useTime != null">
+				use_time = #{useTime,jdbcType=DOUBLE},
+			</if>
+			<if test="questionUuid != null">
+				question_uuid = #{questionUuid,jdbcType=VARCHAR},
+			</if>
+			<if test="userOption != null">
+				user_option = #{userOption,jdbcType=VARCHAR},
+			</if>
+			<if test="rightOption != null">
+				right_option = #{rightOption,jdbcType=VARCHAR},
+			</if>
+			<if test="paperUuid != null">
+				paper_uuid = #{paperUuid,jdbcType=VARCHAR},
+			</if>
+			<if test="questionSn != null">
+				question_sn = #{questionSn,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				create_date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				update_date = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.UserAnswer">
+		update user_answer
+		set uuid = #{uuid,jdbcType=VARCHAR},
+		user_code =
+		#{userCode,jdbcType=VARCHAR},
+		fight_record_uuid =
+		#{fightRecordUuid,jdbcType=VARCHAR},
+		fight_type =
+		#{fightType,jdbcType=INTEGER},
+		is_right = #{isRight,jdbcType=INTEGER},
+		score = #{score,jdbcType=DOUBLE},
+		use_time =
+		#{useTime,jdbcType=DOUBLE},
+		question_uuid =
+		#{questionUuid,jdbcType=VARCHAR},
+		user_option =
+		#{userOption,jdbcType=VARCHAR},
+		right_option =
+		#{rightOption,jdbcType=VARCHAR},
+		paper_uuid =
+		#{paperUuid,jdbcType=VARCHAR},
+		question_sn =
+		#{questionSn,jdbcType=VARCHAR},
+		create_date =
+		#{createDate,jdbcType=TIMESTAMP},
+		update_date =
+		#{updateDate,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+
+
+
+	<sql id="UserAnswer_where_sql">
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="uuid != null">
+			and uuid = #{uuid}
+		</if>
+		<if test="userCode != null">
+			and user_code = #{userCode}
+		</if>
+		<if test="fightRecordUuid != null">
+			and fight_record_uuid = #{fightRecordUuid}
+		</if>
+		<if test="fightType != null">
+			and fight_type = #{fightType}
+		</if>
+		<if test="isRight != null">
+			and is_right = #{isRight}
+		</if>
+		<if test="score != null">
+			and score = #{score}
+		</if>
+		<if test="useTime != null">
+			and use_time = #{useTime}
+		</if>
+		<if test="questionUuid != null">
+			and question_uuid = #{questionUuid}
+		</if>
+		<if test="userOption != null">
+			and user_option = #{userOption}
+		</if>
+		<if test="rightOption != null">
+			and right_option = #{rightOption}
+		</if>
+		<if test="paperUuid != null">
+			and paper_uuid = #{paperUuid}
+		</if>
+		<if test="questionSn != null">
+			and question_sn = #{questionSn}
+		</if>
+		<if test="createDate != null">
+			and create_date = #{createDate}
+		</if>
+		<if test="updateDate != null">
+			and update_date = #{updateDate}
+		</if>
+	</sql>
+
+	<select id="UserAnswer_findByPager" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM user_answer
+		<where>
+			<include refid="UserAnswer_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+		<if test="orderProperty != null">
+			order by ${orderProperty} ${orderDirection}
+		</if>
+		<if test="start != null ">
+			<if test="start >= 0">
+				limit #{start}, #{limit}
+			</if>
+		</if>
+	</select>
+
+	<select id="UserAnswer_findByPager_count" resultType="java.lang.Long">
+		select count(id) from user_answer
+		<where>
+			<include refid="UserAnswer_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+	</select>
+
+
+
+	<!-- 获取用户答题详情 -->
+	<select id="get_user_answer" resultMap="UserAnswerDeliaModelResultMap">
+		SELECT distinct
+		t.user_code,t.is_right,t.user_option,t1.right_option,t.question_sn,t1.question_stem,t1.quesion_option,t1.question_analysis
+		FROM user_answer t,question_info t1 where
+		t.question_uuid=t1.question_uuid
+		<if test="paperUUID !=null">
+			and t1.paper_UUID=#{paperUUID}
+		</if>
+		<if test="fightUUID !=null">
+			and fight_record_uuid=#{fightUUID}
+		</if>
+		<if test="userCode !=null">
+			and user_code=#{userCode}
+		</if>
+	</select>
+
+	<!-- 用户答题详情返回model -->
+	<resultMap type="com.eeduspace.challenge.model.UserAnswerDeliaModel"
+		id="UserAnswerDeliaModelResultMap">
+		<result column="is_right" property="isRight" />
+		<result column="user_code" property="userCode" />
+		<result column="user_option" property="userOption" />
+		<result column="right_option" property="rightOption" />
+		<result column="question_sn" property="questionSn" />
+		<result column="question_stem" property="questionStem" />
+		<result column="question_option" property="quesionOption" />
+		<result column="question_analysis" property="questionAnalysis" />
+	</resultMap>
+
+</mapper>

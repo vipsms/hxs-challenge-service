@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.TaskRuleMapper" >
+  <resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.TaskRule" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="task_info_uuid" property="taskInfoUuid" jdbcType="VARCHAR" />
+    <result column="reward_point" property="rewardPoint" jdbcType="DOUBLE" />
+    <result column="completion_times" property="completionTimes" jdbcType="DOUBLE" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="vip_reward_point" property="vipRewardPoint" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uuid, task_info_uuid, reward_point, completion_times, create_date, update_date, 
+    vip_reward_point
+  </sql>
+  <select id="TaskRule_getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from task_rule
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="TaskRule_deleteById" parameterType="java.lang.Long" >
+    delete from task_rule
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="TaskRule_save" parameterType="com.eeduspace.challenge.persist.po.TaskRule" >
+    insert into task_rule (id, uuid, task_info_uuid, 
+      reward_point, completion_times, create_date, 
+      update_date, vip_reward_point)
+    values (#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR}, #{taskInfoUuid,jdbcType=VARCHAR}, 
+      #{rewardPoint,jdbcType=DOUBLE}, #{completionTimes,jdbcType=DOUBLE}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{vipRewardPoint,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.TaskRule" >
+    insert into task_rule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="taskInfoUuid != null" >
+        task_info_uuid,
+      </if>
+      <if test="rewardPoint != null" >
+        reward_point,
+      </if>
+      <if test="completionTimes != null" >
+        completion_times,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="vipRewardPoint != null" >
+        vip_reward_point,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="taskInfoUuid != null" >
+        #{taskInfoUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardPoint != null" >
+        #{rewardPoint,jdbcType=DOUBLE},
+      </if>
+      <if test="completionTimes != null" >
+        #{completionTimes,jdbcType=DOUBLE},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vipRewardPoint != null" >
+        #{vipRewardPoint,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="TaskRule_update" parameterType="com.eeduspace.challenge.persist.po.TaskRule" >
+    update task_rule
+    <set >
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="taskInfoUuid != null" >
+        task_info_uuid = #{taskInfoUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="rewardPoint != null" >
+        reward_point = #{rewardPoint,jdbcType=DOUBLE},
+      </if>
+      <if test="completionTimes != null" >
+        completion_times = #{completionTimes,jdbcType=DOUBLE},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vipRewardPoint != null" >
+        vip_reward_point = #{vipRewardPoint,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.TaskRule" >
+    update task_rule
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      task_info_uuid = #{taskInfoUuid,jdbcType=VARCHAR},
+      reward_point = #{rewardPoint,jdbcType=DOUBLE},
+      completion_times = #{completionTimes,jdbcType=DOUBLE},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      vip_reward_point = #{vipRewardPoint,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <sql id="TaskRule_where_sql">
+        <if test="uuid != null" >
+           and uuid = #{uuid,jdbcType=VARCHAR}
+        </if>
+        <if test="taskInfoUuid != null" >
+            and task_info_uuid = #{taskInfoUuid,jdbcType=VARCHAR}
+        </if>
+        <if test="rewardPoint != null" >
+            and  reward_point = #{rewardPoint,jdbcType=DOUBLE}
+        </if>
+        <if test="completionTimes != null" >
+            and completion_times = #{completionTimes,jdbcType=DOUBLE}
+        </if>
+        <if test="createDate != null" >
+            and create_date = #{createDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateDate != null" >
+            and update_date = #{updateDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="vipRewardPoint != null" >
+            and vip_reward_point = #{vipRewardPoint,jdbcType=DOUBLE}
+        </if>
+    </sql>
+ 
+    <select id="TaskRule_findByPager" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM task_rule
+        <where>
+            <include refid="TaskRule_where_sql" />
+            <if test="searchProperty != null">
+                ${searchProperty} = #{searchValue}
+            </if>
+        </where>
+        <if test="orderProperty != null">
+            order by ${orderProperty} ${orderDirection}
+        </if>
+        <if test="start != null ">
+            <if test="start >= 0">
+                limit #{start}, #{limit}
+            </if>
+        </if>
+    </select>
+</mapper>

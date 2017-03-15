@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.UserAchievementMapper" >
+  <resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.UserAchievement" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+    <result column="first" property="first" jdbcType="BIGINT" />
+    <result column="second" property="second" jdbcType="BIGINT" />
+    <result column="third" property="third" jdbcType="BIGINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="subject_code" property="subjectCode" jdbcType="VARCHAR" />
+    <result column="grade_code" property="gradeCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_code, first, second, third, create_date, update_date, subject_code, grade_code
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_achievement
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_achievement
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="UserAchievement_save" parameterType="com.eeduspace.challenge.persist.po.UserAchievement" >
+    insert into user_achievement (id, user_code, first, 
+      second, third, create_date, 
+      update_date, subject_code, grade_code
+      )
+    values (#{id,jdbcType=BIGINT}, #{userCode,jdbcType=VARCHAR}, #{first,jdbcType=BIGINT}, 
+      #{second,jdbcType=BIGINT}, #{third,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{subjectCode,jdbcType=VARCHAR}, #{gradeCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.UserAchievement" >
+    insert into user_achievement
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userCode != null" >
+        user_code,
+      </if>
+      <if test="first != null" >
+        first,
+      </if>
+      <if test="second != null" >
+        second,
+      </if>
+      <if test="third != null" >
+        third,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="subjectCode != null" >
+        subject_code,
+      </if>
+      <if test="gradeCode != null" >
+        grade_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userCode != null" >
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="first != null" >
+        #{first,jdbcType=BIGINT},
+      </if>
+      <if test="second != null" >
+        #{second,jdbcType=BIGINT},
+      </if>
+      <if test="third != null" >
+        #{third,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="subjectCode != null" >
+        #{subjectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="gradeCode != null" >
+        #{gradeCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="UserAchievement_update" parameterType="com.eeduspace.challenge.persist.po.UserAchievement" >
+    update user_achievement
+    <set >
+      <if test="userCode != null" >
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="first != null" >
+        first = #{first,jdbcType=BIGINT},
+      </if>
+      <if test="second != null" >
+        second = #{second,jdbcType=BIGINT},
+      </if>
+      <if test="third != null" >
+        third = #{third,jdbcType=BIGINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="subjectCode != null" >
+        subject_code = #{subjectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="gradeCode != null" >
+        grade_code = #{gradeCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.UserAchievement" >
+    update user_achievement
+    set user_code = #{userCode,jdbcType=VARCHAR},
+      first = #{first,jdbcType=BIGINT},
+      second = #{second,jdbcType=BIGINT},
+      third = #{third,jdbcType=BIGINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      subject_code = #{subjectCode,jdbcType=VARCHAR},
+      grade_code = #{gradeCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+  
+  
+  	<sql id="UserAchievement_where_sql">
+		<if test="id != null">
+			and id = #{id}
+		</if>
+	  <if test="userCode != null" >
+       and user_code = #{userCode}
+      </if>
+      <if test="first != null" >
+        and first = #{first}
+      </if>
+      <if test="second != null" >
+        and second = #{second}
+      </if>
+      <if test="third != null" >
+        and third = #{third}
+      </if>
+      <if test="createDate != null" >
+       and create_date = #{createDate}
+      </if>
+      <if test="updateDate != null" >
+       and update_date = #{updateDate}
+      </if>
+      <if test="subjectCode != null" >
+      and  subject_code = #{subjectCode}
+      </if>
+      <if test="gradeCode != null" >
+       and grade_code = #{gradeCode}
+      </if>
+	</sql>
+
+	<select id="UserAchievement_findByPager" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM user_achievement
+		<where>
+			<include refid="UserAchievement_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+		<if test="orderProperty != null">
+			order by ${orderProperty} ${orderDirection}
+		</if>
+		<if test="start != null ">
+			<if test="start >= 0">
+				limit #{start}, #{limit}
+			</if>
+		</if>
+	</select>
+
+	<select id="UserAchievement_findByPager_count" resultType="java.lang.Long">
+		select count(id) from user_achievement
+		<where>
+			<include refid="UserAchievement_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+	</select>
+  
+</mapper>

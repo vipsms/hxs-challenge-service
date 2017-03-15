@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.UserFightMapper">
+	<resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.UserFight">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="uuid" property="uuid" jdbcType="VARCHAR" />
+		<result column="player_a" property="playerA" jdbcType="VARCHAR" />
+		<result column="plaery_b" property="plaeryB" jdbcType="VARCHAR" />
+		<result column="subject_code" property="subjectCode" jdbcType="VARCHAR" />
+		<result column="subject_name" property="subjectName" jdbcType="VARCHAR" />
+		<result column="grade_code" property="gradeCode" jdbcType="VARCHAR" />
+		<result column="grade_name" property="gradeName" jdbcType="VARCHAR" />
+		<result column="unit_code" property="unitCode" jdbcType="VARCHAR" />
+		<result column="unit_name" property="unitName" jdbcType="VARCHAR" />
+		<result column="questions_code" property="questionsCode"
+			jdbcType="VARCHAR" />
+		<result column="battle_type" property="battleType" jdbcType="INTEGER" />
+		<result column="is_over" property="isOver" jdbcType="INTEGER" />
+		<result column="fight_type" property="fightType" jdbcType="INTEGER" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, uuid, player_a, plaery_b, subject_code, subject_name,
+		grade_code,
+		grade_name,
+		unit_code, unit_name, questions_code,
+		battle_type, is_over, fight_type,
+		create_time
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from user_fight
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		user_fight
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="UserFight_save" parameterType="com.eeduspace.challenge.persist.po.UserFight">
+		insert into user_fight
+		(id, uuid, player_a,
+		plaery_b, subject_code, subject_name,
+		grade_code,
+		grade_name, unit_code,
+		unit_name, questions_code, battle_type,
+		is_over,
+		fight_type, create_time
+		)
+		values (#{id,jdbcType=BIGINT}, #{uuid},
+		#{playerA,jdbcType=VARCHAR},
+		#{plaeryB,jdbcType=VARCHAR},
+		#{subjectCode,jdbcType=VARCHAR}, #{subjectName,jdbcType=VARCHAR},
+		#{gradeCode,jdbcType=VARCHAR}, #{gradeName,jdbcType=VARCHAR},
+		#{unitCode,jdbcType=VARCHAR},
+		#{unitName,jdbcType=VARCHAR},
+		#{questionsCode,jdbcType=VARCHAR}, #{battleType,jdbcType=INTEGER},
+		#{isOver,jdbcType=INTEGER}, #{fightType,jdbcType=INTEGER},
+		#{createTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.UserFight">
+		insert into user_fight
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="uuid != null">
+				uuid,
+			</if>
+			<if test="playerA != null">
+				player_a,
+			</if>
+			<if test="plaeryB != null">
+				plaery_b,
+			</if>
+			<if test="subjectCode != null">
+				subject_code,
+			</if>
+			<if test="subjectName != null">
+				subject_name,
+			</if>
+			<if test="gradeCode != null">
+				grade_code,
+			</if>
+			<if test="gradeName != null">
+				grade_name,
+			</if>
+			<if test="unitCode != null">
+				unit_code,
+			</if>
+			<if test="unitName != null">
+				unit_name,
+			</if>
+			<if test="questionsCode != null">
+				questions_code,
+			</if>
+			<if test="battleType != null">
+				battle_type,
+			</if>
+			<if test="isOver != null">
+				is_over,
+			</if>
+			<if test="fightType != null">
+				fight_type,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="uuid != null">
+				#{uuid,jdbcType=VARCHAR},
+			</if>
+			<if test="playerA != null">
+				#{playerA,jdbcType=VARCHAR},
+			</if>
+			<if test="plaeryB != null">
+				#{plaeryB,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectCode != null">
+				#{subjectCode,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectName != null">
+				#{subjectName,jdbcType=VARCHAR},
+			</if>
+			<if test="gradeCode != null">
+				#{gradeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="gradeName != null">
+				#{gradeName,jdbcType=VARCHAR},
+			</if>
+			<if test="unitCode != null">
+				#{unitCode,jdbcType=VARCHAR},
+			</if>
+			<if test="unitName != null">
+				#{unitName,jdbcType=VARCHAR},
+			</if>
+			<if test="questionsCode != null">
+				#{questionsCode,jdbcType=VARCHAR},
+			</if>
+			<if test="battleType != null">
+				#{battleType,jdbcType=INTEGER},
+			</if>
+			<if test="isOver != null">
+				#{isOver,jdbcType=INTEGER},
+			</if>
+			<if test="fightType != null">
+				#{fightType,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="UserFight_update" parameterType="com.eeduspace.challenge.persist.po.UserFight">
+		update user_fight
+		<set>
+			<if test="uuid != null">
+				uuid = #{uuid,jdbcType=VARCHAR},
+			</if>
+			<if test="playerA != null">
+				player_a = #{playerA,jdbcType=VARCHAR},
+			</if>
+			<if test="plaeryB != null">
+				plaery_b = #{plaeryB,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectCode != null">
+				subject_code = #{subjectCode,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectName != null">
+				subject_name = #{subjectName,jdbcType=VARCHAR},
+			</if>
+			<if test="gradeCode != null">
+				grade_code = #{gradeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="gradeName != null">
+				grade_name = #{gradeName,jdbcType=VARCHAR},
+			</if>
+			<if test="unitCode != null">
+				unit_code = #{unitCode,jdbcType=VARCHAR},
+			</if>
+			<if test="unitName != null">
+				unit_name = #{unitName,jdbcType=VARCHAR},
+			</if>
+			<if test="questionsCode != null">
+				questions_code = #{questionsCode,jdbcType=VARCHAR},
+			</if>
+			<if test="battleType != null">
+				battle_type = #{battleType,jdbcType=INTEGER},
+			</if>
+			<if test="isOver != null">
+				is_over = #{isOver,jdbcType=INTEGER},
+			</if>
+			<if test="fightType != null">
+				fight_type = #{fightType,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.UserFight">
+		update user_fight
+		set uuid = #{uuid,jdbcType=VARCHAR},
+		player_a =
+		#{playerA,jdbcType=VARCHAR},
+		plaery_b = #{plaeryB,jdbcType=VARCHAR},
+		subject_code = #{subjectCode,jdbcType=VARCHAR},
+		subject_name =
+		#{subjectName,jdbcType=VARCHAR},
+		grade_code =
+		#{gradeCode,jdbcType=VARCHAR},
+		grade_name =
+		#{gradeName,jdbcType=VARCHAR},
+		unit_code =
+		#{unitCode,jdbcType=VARCHAR},
+		unit_name = #{unitName,jdbcType=VARCHAR},
+		questions_code = #{questionsCode,jdbcType=VARCHAR},
+		battle_type =
+		#{battleType,jdbcType=INTEGER},
+		is_over = #{isOver,jdbcType=INTEGER},
+		fight_type = #{fightType,jdbcType=INTEGER},
+		create_time =
+		#{createTime,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+
+
+
+	<sql id="UserFight_where_sql">
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="uuid != null">
+			and uuid = #{uuid}
+		</if>
+		<if test="playerA != null">
+			and player_a = #{playerA}
+		</if>
+		<if test="plaeryB != null">
+			and plaery_b = #{plaeryB}
+		</if>
+		<if test="subjectCode != null">
+			and subject_code = #{subjectCode}
+		</if>
+		<if test="subjectName != null">
+			and subject_name = #{subjectName}
+		</if>
+		<if test="gradeCode != null">
+			and grade_code = #{gradeCode}
+		</if>
+		<if test="gradeName != null">
+			and grade_name = #{gradeName}
+		</if>
+		<if test="unitCode != null">
+			and unit_code = #{unitCode}
+		</if>
+		<if test="unitName != null">
+			and unit_name = #{unitName}
+		</if>
+		<if test="questionsCode != null">
+			and questions_code = #{questionsCode}
+		</if>
+		<if test="battleType != null">
+			and battle_type = #{battleType}
+		</if>
+		<if test="isOver != null">
+			and is_over = #{isOver,jdbcType}
+		</if>
+		<if test="fightType != null">
+			and fight_type = #{fightType}
+		</if>
+		<if test="createTime != null">
+			and create_time = #{createTime}
+		</if>
+	</sql>
+
+	<select id="UserFight_findByPager" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM user_fight
+		<where>
+			<include refid="UserFight_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+		<if test="orderProperty != null">
+			order by ${orderProperty} ${orderDirection}
+		</if>
+		<if test="start != null ">
+			<if test="start >= 0">
+				limit #{start}, #{limit}
+			</if>
+		</if>
+	</select>
+
+	<select id="UserFight_findByPager_count" resultType="java.lang.Long">
+		select count(id) from user_fight
+		<where>
+			<include refid="UserFight_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+	</select>
+</mapper>

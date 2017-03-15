@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.UserSignMapper">
+    <resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.UserSign">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="uuid" property="uuid" jdbcType="VARCHAR"/>
+        <result column="user_code" property="userCode" jdbcType="VARCHAR"/>
+        <result column="sign_date" property="signDate" jdbcType="TIMESTAMP"/>
+        <result column="integral" property="integral" jdbcType="BIGINT"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="sign_times" property="signTimes" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, uuid, user_code,sign_date, integral, create_date, update_date,sign_times
+  </sql>
+    <select id="UserSign_getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from user_sign
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="UserSign_findLastByUserCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+      id, uuid, user_code,sign_date, integral, create_date, update_date,sign_times
+        from user_sign
+        where user_code = #{userCode,jdbcType=BIGINT} order by
+		sign_date DESC
+    </select>
+    <delete id="UserSign_deleteById" parameterType="java.lang.Long">
+    delete from user_sign
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="UserSign_save" parameterType="com.eeduspace.challenge.persist.po.UserSign">
+        insert into user_sign (id, uuid, user_code,sign_date,
+        integral, create_date, update_date,
+        sign_times)
+        values (#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR},#{userCode,jdbcType=VARCHAR},
+        #{signDate,jdbcType=TIMESTAMP},
+        #{integral}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP},
+        #{signTimes,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.UserSign">
+        insert into user_sign
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="userCode != null">
+                user_code,
+            </if>
+            <if test="signDate != null">
+                sign_date,
+            </if>
+            <if test="integral != null">
+                integral,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="signTimes != null">
+                sign_times,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="uuid != null">
+                #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="userCode != null">
+                #{userCode,jdbcType=VARCHAR},
+            </if>
+            <if test="signDate != null">
+                #{signDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="integral != null">
+                #{integral},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="signTimes != null">
+                #{signTimes,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="UserSign_update" parameterType="com.eeduspace.challenge.persist.po.UserSign">
+        update user_sign
+        <set>
+            <if test="uuid != null">
+                uuid = #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="userCode != null">
+                user_code = #{userCode,jdbcType=VARCHAR},
+            </if>
+            <if test="signDate != null">
+                sign_date = #{signDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="integral != null">
+                integral = #{integral},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="signTimes != null">
+                sign_times = #{signTimes,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.eeduspace.challenge.persist.po.UserSign">
+        update user_sign
+        set uuid = #{uuid,jdbcType=VARCHAR},
+        user_code = #{userCode,jdbcType=VARCHAR},
+        sign_date = #{signDate,jdbcType=TIMESTAMP},
+        integral = #{integral},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+        sign_times = #{signTimes,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.UserSign">
+        update user_sign
+        set uuid = #{uuid,jdbcType=VARCHAR},
+        user_code = #{userCode,jdbcType=VARCHAR},
+        sign_date = #{signDate,jdbcType=TIMESTAMP},
+        integral = #{integral},
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+        update_date = #{updateDate,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+
+    <sql id="UserSign_where_sql">
+        <if test="uuid != null">
+            and uuid = #{uuid,jdbcType=VARCHAR}
+        </if>
+        <if test="userCode != null">
+            and user_code = #{userCode,jdbcType=VARCHAR}
+        </if>
+        <if test="signDate != null">
+            and sign_date = #{signDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="integral != null">
+            and integral = #{integral}
+        </if>
+        <if test="createDate != null">
+            and create_date = #{createDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateDate != null">
+            and update_date = #{updateDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="signTimes != null">
+            and sign_times = #{signTimes,jdbcType=LONGVARCHAR}
+        </if>
+    </sql>
+
+    <select id="UserSign_findByPager" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_sign
+        <where>
+            <include refid="UserSign_where_sql" />
+            <if test="searchProperty != null">
+                ${searchProperty} = #{searchValue}
+            </if>
+        </where>
+        <if test="orderProperty != null">
+            order by ${orderProperty} ${orderDirection}
+        </if>
+        <if test="start != null ">
+            <if test="start >= 0">
+                limit #{start}, #{limit}
+            </if>
+        </if>
+    </select>
+</mapper>

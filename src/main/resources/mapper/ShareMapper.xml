@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.ShareMapper" >
+  <resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.Share" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="creat_date" property="creatDate" jdbcType="TIMESTAMP" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="event_type" property="eventType" jdbcType="VARCHAR" />
+    <result column="share_type" property="shareType" jdbcType="VARCHAR" />
+    <result column="equipmentSource" property="equipmentsource" jdbcType="VARCHAR" />
+    <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, creat_date, uuid, event_type, share_type, equipmentSource, user_code
+  </sql>
+   <select id="Share_getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from share
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+<delete id="Share_deleteById" parameterType="java.lang.Long" >
+    delete from share
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="Share_save" keyProperty="id" useGeneratedKeys="true" >
+    insert into share (id, creat_date, uuid, 
+      event_type, share_type, equipmentSource, 
+      user_code)
+    values (#{id,jdbcType=BIGINT}, #{creatDate,jdbcType=TIMESTAMP}, #{uuid,jdbcType=VARCHAR}, 
+      #{eventType,jdbcType=VARCHAR}, #{shareType,jdbcType=VARCHAR}, #{equipmentsource,jdbcType=VARCHAR}, 
+      #{userCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.Share" >
+    insert into share
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="creatDate != null" >
+        creat_date,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="eventType != null" >
+        event_type,
+      </if>
+      <if test="shareType != null" >
+        share_type,
+      </if>
+      <if test="equipmentsource != null" >
+        equipmentSource,
+      </if>
+      <if test="userCode != null" >
+        user_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="creatDate != null" >
+        #{creatDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="eventType != null" >
+        #{eventType,jdbcType=VARCHAR},
+      </if>
+      <if test="shareType != null" >
+        #{shareType,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentsource != null" >
+        #{equipmentsource,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null" >
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eeduspace.challenge.persist.po.Share" >
+    update share
+    <set >
+      <if test="creatDate != null" >
+        creat_date = #{creatDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="eventType != null" >
+        event_type = #{eventType,jdbcType=VARCHAR},
+      </if>
+      <if test="shareType != null" >
+        share_type = #{shareType,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentsource != null" >
+        equipmentSource = #{equipmentsource,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null" >
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="Share_update" parameterType="com.eeduspace.challenge.persist.po.Share" >
+    update share
+    set creat_date = #{creatDate,jdbcType=TIMESTAMP},
+      uuid = #{uuid,jdbcType=VARCHAR},
+      event_type = #{eventType,jdbcType=VARCHAR},
+      share_type = #{shareType,jdbcType=VARCHAR},
+      equipmentSource = #{equipmentsource,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  
+ <sql id="Share_where_sql">
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="uuid != null">
+			and uuid = #{uuid}
+		</if>
+		<if test="action != null">
+			and action = #{action}
+		</if>
+		<if test="shareType != null">
+			and share_type = #{shareType}
+		</if>
+		<if test="source != null">
+			and source = #{source}
+		</if>
+		<if test="createDate != null">
+			and create_date = #{createDate}
+		</if>
+		<if test="userCode != null">
+			and  user_code= #{userCode}
+		</if>
+	</sql>
+     <select id="Share_findByPager" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM share
+		<where>
+			<include refid="Share_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+		<if test="orderProperty != null">
+			order by ${orderProperty} ${orderDirection}
+		</if>
+		<if test="start != null ">
+			<if test="start >= 0">
+				limit #{start}, #{limit}
+			</if>
+		</if>
+	</select>
+
+	<select id="Share_findByPager_count" resultType="java.lang.Long">
+		select count(id) from share
+		<where>
+			<include refid="Share_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+	</select>
+  
+  <select id="find_by_new_date" resultType="java.lang.Long">
+		select 
+		<include refid="Base_Column_List" />
+		from share s  where  TO_DAYS(s.creat_date)=TO_DAYS(NOW()) and   s.user_code = #{userCode,jdbcType=VARCHAR}
+	</select>
+
+  
+</mapper>

@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.FightResultMapper">
+	<resultMap id="BaseResultMap"
+		type="com.eeduspace.challenge.persist.po.FightResult">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="uuid" property="uuid" jdbcType="VARCHAR" />
+		<result column="user_code" property="userCode" jdbcType="VARCHAR" />
+		<result column="use_time" property="useTime" jdbcType="BIGINT" />
+		<result column="get_score" property="getScore" jdbcType="DOUBLE" />
+		<result column="result" property="result" jdbcType="VARCHAR" />
+		<result column="integral" property="integral" jdbcType="BIGINT" />
+		<result column="fight_value" property="fightValue" jdbcType="BIGINT" />
+		<result column="current_rank" property="currentRank" jdbcType="BIGINT" />
+		<result column="fighted_rank" property="fightedRank" jdbcType="BIGINT" />
+		<result column="fight_result" property="fightResult" jdbcType="INTEGER" />
+		<result column="fight_uuid" property="fightUuid" jdbcType="VARCHAR" />
+		<result column="fight_type" property="fightType" jdbcType="INTEGER" />
+		<result column="paper_uuid" property="paperUuid" jdbcType="VARCHAR" />
+		<result column="paper_title" property="paperTitle" jdbcType="VARCHAR" />
+		<result column="subject_code" property="subjectCode" jdbcType="VARCHAR" />
+		<result column="grade_code" property="gradeCode" jdbcType="VARCHAR" />
+		<result column="unit_code" property="unitCode" jdbcType="VARCHAR" />
+		<result column="volume_code" property="volumeCode" jdbcType="VARCHAR" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, uuid, user_code, use_time, get_score, result, integral,
+		fight_value,
+		current_rank,
+		fighted_rank, fight_result, fight_uuid,
+		fight_type, paper_uuid, paper_title,
+		subject_code,
+		grade_code,
+		unit_code, volume_code, create_date, update_date
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from fight_result
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		fight_result
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="FightResult_save" parameterType="com.eeduspace.challenge.persist.po.FightResult">
+		insert into
+		fight_result (id, uuid, user_code,
+		use_time, get_score, result,
+		integral, fight_value, current_rank,
+		fighted_rank, fight_result,
+		fight_uuid,
+		fight_type, paper_uuid, paper_title,
+		subject_code,
+		grade_code, unit_code,
+		volume_code, create_date, update_date
+		)
+		values
+		(#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR},
+		#{userCode,jdbcType=VARCHAR},
+		#{useTime,jdbcType=BIGINT},
+		#{getScore,jdbcType=DOUBLE}, #{result,jdbcType=VARCHAR},
+		#{integral,jdbcType=DOUBLE}, #{fightValue},
+		#{currentRank,jdbcType=DOUBLE},
+		#{fightedRank,jdbcType=DOUBLE},
+		#{fightResult,jdbcType=INTEGER}, #{fightUuid,jdbcType=VARCHAR},
+		#{fightType,jdbcType=INTEGER}, #{paperUuid,jdbcType=VARCHAR},
+		#{paperTitle,jdbcType=VARCHAR},
+		#{subjectCode,jdbcType=VARCHAR},
+		#{gradeCode,jdbcType=VARCHAR}, #{unitCode,jdbcType=VARCHAR},
+		#{volumeCode,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+		#{updateDate,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.FightResult">
+		insert into fight_result
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="uuid != null">
+				uuid,
+			</if>
+			<if test="userCode != null">
+				user_code,
+			</if>
+			<if test="useTime != null">
+				use_time,
+			</if>
+			<if test="getScore != null">
+				get_score,
+			</if>
+			<if test="result != null">
+				result,
+			</if>
+			<if test="integral != null">
+				integral,
+			</if>
+			<if test="fightValue != null">
+				fight_value,
+			</if>
+			<if test="currentRank != null">
+				current_rank,
+			</if>
+			<if test="fightedRank != null">
+				fighted_rank,
+			</if>
+			<if test="fightResult != null">
+				fight_result,
+			</if>
+			<if test="fightUuid != null">
+				fight_uuid,
+			</if>
+			<if test="fightType != null">
+				fight_type,
+			</if>
+			<if test="paperUuid != null">
+				paper_uuid,
+			</if>
+			<if test="paperTitle != null">
+				paper_title,
+			</if>
+			<if test="subjectCode != null">
+				subject_code,
+			</if>
+			<if test="gradeCode != null">
+				grade_code,
+			</if>
+			<if test="unitCode != null">
+				unit_code,
+			</if>
+			<if test="volumeCode != null">
+				volume_code,
+			</if>
+			<if test="createDate != null">
+				create_date,
+			</if>
+			<if test="updateDate != null">
+				update_date,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="uuid != null">
+				#{uuid,jdbcType=VARCHAR},
+			</if>
+			<if test="userCode != null">
+				#{userCode,jdbcType=VARCHAR},
+			</if>
+			<if test="useTime != null">
+				#{useTime,jdbcType=BIGINT},
+			</if>
+			<if test="getScore != null">
+				#{getScore,jdbcType=DOUBLE},
+			</if>
+			<if test="result != null">
+				#{result,jdbcType=VARCHAR},
+			</if>
+			<if test="integral != null">
+				#{integral},
+			</if>
+			<if test="fightValue != null">
+				#{fightValue},
+			</if>
+			<if test="currentRank != null">
+				#{currentRank,jdbcType=DOUBLE},
+			</if>
+			<if test="fightedRank != null">
+				#{fightedRank,jdbcType=DOUBLE},
+			</if>
+			<if test="fightResult != null">
+				#{fightResult,jdbcType=INTEGER},
+			</if>
+			<if test="fightUuid != null">
+				#{fightUuid,jdbcType=VARCHAR},
+			</if>
+			<if test="fightType != null">
+				#{fightType,jdbcType=INTEGER},
+			</if>
+			<if test="paperUuid != null">
+				#{paperUuid,jdbcType=VARCHAR},
+			</if>
+			<if test="paperTitle != null">
+				#{paperTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectCode != null">
+				#{subjectCode,jdbcType=VARCHAR},
+			</if>
+			<if test="gradeCode != null">
+				#{gradeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="unitCode != null">
+				#{unitCode,jdbcType=VARCHAR},
+			</if>
+			<if test="volumeCode != null">
+				#{volumeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="FightResult_update" parameterType="com.eeduspace.challenge.persist.po.FightResult">
+		update fight_result
+		<set>
+			<if test="uuid != null">
+				uuid = #{uuid,jdbcType=VARCHAR},
+			</if>
+			<if test="userCode != null">
+				user_code = #{userCode,jdbcType=VARCHAR},
+			</if>
+			<if test="useTime != null">
+				use_time = #{useTime,jdbcType=BIGINT},
+			</if>
+			<if test="getScore != null">
+				get_score = #{getScore,jdbcType=DOUBLE},
+			</if>
+			<if test="result != null">
+				result = #{result,jdbcType=VARCHAR},
+			</if>
+			<if test="integral != null">
+				integral = #{integral},
+			</if>
+			<if test="fightValue != null">
+				fight_value = #{fightValue},
+			</if>
+			<if test="currentRank != null">
+				current_rank = #{currentRank,jdbcType=BIGINT},
+			</if>
+			<if test="fightedRank != null">
+				fighted_rank = #{fightedRank,jdbcType=BIGINT},
+			</if>
+			<if test="fightResult != null">
+				fight_result = #{fightResult,jdbcType=INTEGER},
+			</if>
+			<if test="fightUuid != null">
+				fight_uuid = #{fightUuid,jdbcType=VARCHAR},
+			</if>
+			<if test="fightType != null">
+				fight_type = #{fightType,jdbcType=INTEGER},
+			</if>
+			<if test="paperUuid != null">
+				paper_uuid = #{paperUuid,jdbcType=VARCHAR},
+			</if>
+			<if test="paperTitle != null">
+				paper_title = #{paperTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectCode != null">
+				subject_code = #{subjectCode,jdbcType=VARCHAR},
+			</if>
+			<if test="gradeCode != null">
+				grade_code = #{gradeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="unitCode != null">
+				unit_code = #{unitCode,jdbcType=VARCHAR},
+			</if>
+			<if test="volumeCode != null">
+				volume_code = #{volumeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				create_date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				update_date = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.FightResult">
+		update
+		fight_result
+		set uuid = #{uuid,jdbcType=VARCHAR},
+		user_code =
+		#{userCode,jdbcType=VARCHAR},
+		use_time = #{useTime,jdbcType=BIGINT},
+		get_score = #{getScore,jdbcType=DOUBLE},
+		result =
+		#{result,jdbcType=VARCHAR},
+		integral = #{integral,jdbcType=DOUBLE},
+		fight_value = #{fightValue},
+		current_rank =
+		#{currentRank,jdbcType=BIGINT},
+		fighted_rank =
+		#{fightedRank,jdbcType=BIGINT},
+		fight_result =
+		#{fightResult,jdbcType=INTEGER},
+		fight_uuid =
+		#{fightUuid,jdbcType=VARCHAR},
+		fight_type =
+		#{fightType,jdbcType=INTEGER},
+		paper_uuid =
+		#{paperUuid,jdbcType=VARCHAR},
+		paper_title =
+		#{paperTitle,jdbcType=VARCHAR},
+		subject_code =
+		#{subjectCode,jdbcType=VARCHAR},
+		grade_code =
+		#{gradeCode,jdbcType=VARCHAR},
+		unit_code =
+		#{unitCode,jdbcType=VARCHAR},
+		volume_code =
+		#{volumeCode,jdbcType=VARCHAR},
+		create_date =
+		#{createDate,jdbcType=TIMESTAMP},
+		update_date =
+		#{updateDate,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+	<sql id="FightResult_where_sql">
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="uuid != null">
+			and uuid = #{uuid}
+		</if>
+		<if test="userCode != null">
+			and user_code = #{userCode}
+		</if>
+		<if test="useTime != null">
+			and use_time = #{useTime}
+		</if>
+		<if test="getScore != null">
+			and get_score = #{getScore}
+		</if>
+		<if test="result != null">
+			and result = #{result}
+		</if>
+		<if test="integral != null">
+			and integral = #{integral}
+		</if>
+		<if test="fightValue != null">
+			and fight_value = #{fightValue}
+		</if>
+		<if test="currentRank != null">
+			and current_rank = #{currentRank}
+		</if>
+		<if test="fightedRank != null">
+			and fighted_rank = #{fightedRank}
+		</if>
+		<if test="fightResult != null">
+			and fight_result = #{fightResult}
+		</if>
+		<if test="fightUuid != null">
+			and fight_uuid = #{fightUuid}
+		</if>
+		<if test="fightType != null">
+			and fight_type = #{fightType}
+		</if>
+		<if test="paperUuid != null">
+			and paper_uuid = #{paperUuid}
+		</if>
+		<if test="paperTitle != null">
+			and paper_title = #{paperTitle}
+		</if>
+		<if test="subjectCode != null">
+			and subject_code = #{subjectCode}
+		</if>
+		<if test="gradeCode != null">
+			and grade_code = #{gradeCode}
+		</if>
+		<if test="unitCode != null">
+			and unit_code = #{unitCode}
+		</if>
+		<if test="volumeCode != null">
+			and volume_code = #{volumeCode}
+		</if>
+		<if test="createDate != null">
+			and create_date = #{createDate}
+		</if>
+		<if test="updateDate != null">
+			and update_date = #{updateDate}
+		</if>
+	</sql>
+
+	<select id="FightResult_findByPager" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM fight_result
+		<where>
+			<include refid="FightResult_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+		<if test="orderProperty != null">
+			order by ${orderProperty} ${orderDirection}
+		</if>
+		<if test="start != null ">
+			<if test="start >= 0">
+				limit #{start}, #{limit}
+			</if>
+		</if>
+	</select>
+
+	<select id="FightResult_findByPager_count" resultType="java.lang.Long">
+		select count(id) from fight_result
+		<where>
+			<include refid="FightResult_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+	</select>
+
+
+
+
+	<!-- 获取用户得分最高的N张试卷 -->
+	<select id="get_user_highest_score_paper" resultMap="BaseResultMap">
+		SELECT
+		t.paper_uuid,t.paper_title,t.fight_uuid,t.user_code,t.subject_code,t.grade_code,t.get_score
+		FROM
+		(SELECT * FROM fight_result where user_code=#{userCode} and
+		subject_code=#{subjectCode} and grade_code=#{gradeCode} ORDER BY
+		get_score DESC ) t
+		GROUP BY
+		t.paper_uuid ORDER
+		BY t.get_score DESC
+		limit
+		<choose>
+			<when test="paperSize !=null ">
+				#{paperSize}
+			</when>
+			<otherwise>
+				5
+			</otherwise>
+		</choose>
+
+	</select>
+
+<!-- 获取对战结果详情信息 -->
+	<select id="get_battle_result_detail" resultMap="BattleResultModel">
+		SELECT distinct 
+		t.fighted_rank,t.current_rank,ui.head_img_url,ui.user_code,ui.nick_name,u.is_vip,u.fight_value,t.use_time,
+		t.get_score,t.fight_result,t.integral,t.fight_value as obtain_fight_value,
+		t.grade_code,t.unit_code,t.subject_code,t.paper_uuid   
+		FROM fight_result t,user_info ui,`user` u where
+		ui.user_code=u.user_code and u.user_code=t.user_code and t.fight_uuid=#{fightUUID} 
+
+	</select>
+	<resultMap type="com.eeduspace.challenge.model.battle.BattleResultModel" id="BattleResultModel">
+		<result column="fighted_rank" property="fightedRank"  />
+		<result column="current_rank" property="currentRank"  />
+		<result column="head_img_url" property="headImgUrl"  />
+		<result column="user_code" property="userCode"  />
+		<result column="nick_name" property="nickName"  />
+		<result column="is_vip" property="isVip"  />
+		<result column="fight_value" property="fightValue"  />
+		<result column="use_time" property="userUseTime"  />
+		<result column="get_score" property="userGetScore"  />
+		<result column="fight_result" property="battleResult"  />
+		<result column="integral" property="integral"  />
+		<result column="obtain_fight_value"  property="obtainFightValue"/>
+		<result column="subject_code" property="subjectCode" jdbcType="VARCHAR" />
+		<result column="grade_code" property="gradeCode" jdbcType="VARCHAR" />
+		<result column="unit_code" property="unitCode" jdbcType="VARCHAR" />
+		<result column="paper_uuid" property="pagerCode" jdbcType="VARCHAR" />
+	</resultMap>
+</mapper>

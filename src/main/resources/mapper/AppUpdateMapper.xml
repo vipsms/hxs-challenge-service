@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.AppUpdateMapper" >
+  <resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.AppUpdate" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="app_describe" property="appDescribe" jdbcType="VARCHAR" />
+    <result column="app_name" property="appName" jdbcType="VARCHAR" />
+    <result column="app_version" property="appVersion" jdbcType="INTEGER" />
+    <result column="available" property="available" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="down_url" property="downUrl" jdbcType="VARCHAR" />
+    <result column="necessary" property="necessary" jdbcType="BIT" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, app_describe, app_name, app_version, available, create_time, down_url, necessary, 
+    uuid
+  </sql>
+  <select id="AppUpdate_getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from app_update
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="AppUpdate_deleteById" parameterType="java.lang.Long" >
+    delete from app_update
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="AppUpdate_save" keyProperty="id" useGeneratedKeys="true">
+    insert into app_update ( app_describe, app_name, 
+      app_version, available, create_time, 
+      down_url, necessary, uuid
+      )
+    values (#{appDescribe,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR}, 
+      #{appVersion,jdbcType=INTEGER}, #{available,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{downUrl,jdbcType=VARCHAR}, #{necessary,jdbcType=BIT}, #{uuid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.AppUpdate" >
+    insert into app_update
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="appDescribe != null" >
+        app_describe,
+      </if>
+      <if test="appName != null" >
+        app_name,
+      </if>
+      <if test="appVersion != null" >
+        app_version,
+      </if>
+      <if test="available != null" >
+        available,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="downUrl != null" >
+        down_url,
+      </if>
+      <if test="necessary != null" >
+        necessary,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="appDescribe != null" >
+        #{appDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="appName != null" >
+        #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="appVersion != null" >
+        #{appVersion,jdbcType=INTEGER},
+      </if>
+      <if test="available != null" >
+        #{available,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="downUrl != null" >
+        #{downUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="necessary != null" >
+        #{necessary,jdbcType=BIT},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eeduspace.challenge.persist.po.AppUpdate" >
+    update app_update
+    <set >
+      <if test="appDescribe != null" >
+        app_describe = #{appDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="appName != null" >
+        app_name = #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="appVersion != null" >
+        app_version = #{appVersion,jdbcType=INTEGER},
+      </if>
+      <if test="available != null" >
+        available = #{available,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="downUrl != null" >
+        down_url = #{downUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="necessary != null" >
+        necessary = #{necessary,jdbcType=BIT},
+      </if>
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="AppUpdate_update" parameterType="com.eeduspace.challenge.persist.po.AppUpdate" >
+    update app_update
+    set app_describe = #{appDescribe,jdbcType=VARCHAR},
+      app_name = #{appName,jdbcType=VARCHAR},
+      app_version = #{appVersion,jdbcType=INTEGER},
+      available = #{available,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      down_url = #{downUrl,jdbcType=VARCHAR},
+      necessary = #{necessary,jdbcType=BIT},
+      uuid = #{uuid,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+  
+    <sql id="AppUpdate_where_sql">
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="uuid != null">
+			and uuid = #{uuid}
+		</if>
+		<if test="createTime != null">
+			and create_time = #{createTime}
+		</if>
+		<if test="appDescribe != null">
+			and app_describe = #{appDescribe}
+		</if>
+		<if test="appName != null">
+			and app_name = #{appName}
+		</if>
+		<if test="appVersion != null">
+			and app_version = #{appVersion}
+		</if>
+		<if test="available != null">
+			and available = #{available}
+		</if>
+		<if test="downUrl != null">
+			and down_url = #{downUrl}
+		</if>
+		<if test="necessary != null">
+			and necessary = #{necessary}
+		</if>
+	</sql>
+     <select id="AppUpdate_findByPager" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM app_update
+		<where>
+			<include refid="AppUpdate_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+		<if test="orderProperty != null">
+			order by ${orderProperty} ${orderDirection}
+		</if>
+		<if test="start != null ">
+			<if test="start >= 0">
+				limit #{start}, #{limit}
+			</if>
+		</if>
+	</select>
+
+	<select id="AppUpdate_findByPager_count" resultType="java.lang.Long">
+		select count(id) from app_update
+		<where>
+			<include refid="AppUpdate_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+	</select>
+   
+  
+  
+  
+</mapper>

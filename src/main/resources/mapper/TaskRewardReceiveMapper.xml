@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.TaskRewardReceiveMapper" >
+  <resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.TaskRewardReceive" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+    <result column="task_type" property="taskType" jdbcType="VARCHAR" />
+    <result column="task_uuid" property="taskUuid" jdbcType="VARCHAR" />
+    <result column="task_name" property="taskName" jdbcType="VARCHAR" />
+    <result column="concrete_task_code" property="concreteTaskCode" jdbcType="VARCHAR" />
+    <result column="receive_state" property="receiveState" jdbcType="INTEGER" />
+    <result column="receive_date" property="receiveDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="reward_point" property="rewardPoint" jdbcType="DOUBLE" />
+    <result column="finish_state" property="finishState" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uuid, user_code, task_type, task_uuid, task_name, concrete_task_code,
+    receive_state, receive_date, update_date,reward_point,finish_state  
+  </sql>
+  <select id="TaskRewardReceive_getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from task_reward_receive
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="TaskRewardReceive_deleteById" parameterType="java.lang.Long" >
+    delete from task_reward_receive
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="TaskRewardReceive_save" parameterType="com.eeduspace.challenge.persist.po.TaskRewardReceive" >
+    insert into task_reward_receive (id, uuid, user_code,
+      task_type, task_uuid, task_name,
+      concrete_task_code, receive_state,
+      receive_date, update_date,reward_point,finish_state)
+    values (#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR},
+      #{taskType,jdbcType=VARCHAR}, #{taskUuid,jdbcType=VARCHAR}, #{taskName,jdbcType=VARCHAR},
+      #{concreteTaskCode,jdbcType=VARCHAR}, #{receiveState,jdbcType=INTEGER},
+      #{receiveDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{rewardPoint,jdbcType=DOUBLE},#{finishState,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.TaskRewardReceive" >
+    insert into task_reward_receive
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="userCode != null" >
+        user_code,
+      </if>
+      <if test="taskType != null" >
+        task_type,
+      </if>
+      <if test="taskUuid != null" >
+        task_uuid,
+      </if>
+      <if test="taskName != null" >
+        task_name,
+      </if>
+      <if test="concreteTaskCode != null" >
+          concrete_task_code,
+      </if>
+      <if test="receiveState != null" >
+        receive_state,
+      </if>
+      <if test="receiveDate != null" >
+        receive_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="rewardPoint != null" >
+          reward_point,
+      </if>
+      <if test="finishState != null" >
+          finish_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null" >
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null" >
+        #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="taskUuid != null" >
+        #{taskUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null" >
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="concreteTaskCode != null" >
+        #{concreteTaskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveState != null" >
+        #{receiveState,jdbcType=INTEGER},
+      </if>
+      <if test="receiveDate != null" >
+        #{receiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rewardPoint != null" >
+        #{rewardPoint,jdbcType=DOUBLE},
+      </if>
+      <if test="finishState != null" >
+        #{finishState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="TaskRewardReceive_update" parameterType="com.eeduspace.challenge.persist.po.TaskRewardReceive" >
+    update task_reward_receive
+    <set >
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null" >
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null" >
+        task_type = #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="taskUuid != null" >
+        task_uuid = #{taskUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null" >
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="concreteTaskCode != null" >
+          concrete_task_code = #{concreteTaskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveState != null" >
+        receive_state = #{receiveState,jdbcType=INTEGER},
+      </if>
+      <if test="receiveDate != null" >
+        receive_date = #{receiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rewardPoint != null" >
+        reward_point = #{rewardPoint,jdbcType=DOUBLE},
+      </if>
+      <if test="finishState != null" >
+        finish_state = #{finishState,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.TaskRewardReceive" >
+    update task_reward_receive
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      task_type = #{taskType,jdbcType=VARCHAR},
+      task_uuid = #{taskUuid,jdbcType=VARCHAR},
+      task_name = #{taskName,jdbcType=VARCHAR},
+      concrete_task_code = #{concreteTaskCode,jdbcType=VARCHAR},
+      receive_state = #{receiveState,jdbcType=INTEGER},
+      receive_date = #{receiveDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      reward_point = #{rewardPoint,jdbcType=DOUBLE}
+      finish_state = #{finishState,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+    <sql id="TaskRewardReceive_where_sql">
+        <if test="uuid != null" >
+            and uuid = #{uuid,jdbcType=VARCHAR}
+        </if>
+        <if test="userCode != null" >
+            and user_code = #{userCode,jdbcType=VARCHAR}
+        </if>
+        <if test="taskType != null" >
+            and  task_type = #{taskType,jdbcType=VARCHAR}
+        </if>
+        <if test="taskUuid != null" >
+            and  task_uuid = #{taskUuid,jdbcType=VARCHAR}
+        </if>
+        <if test="taskName != null" >
+            and task_name = #{taskName,jdbcType=VARCHAR}
+        </if>
+        <if test="concreteTaskCode != null" >
+            and concrete_task_code = #{concreteTaskCode,jdbcType=VARCHAR}
+        </if>
+        <if test="receiveState != null" >
+            and receive_state = #{receiveState,jdbcType=INTEGER}
+        </if>
+        <if test="receiveDate != null" >
+            and receive_date = #{receiveDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateDate != null" >
+           and update_date = #{updateDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="rewardPoint != null" >
+           and reward_point = #{updateDate,jdbcType=DOUBLE}
+        </if>
+        <if test="rewardPoint != null" >
+           and finish_state = #{finishState,jdbcType=INTEGER}
+        </if>
+    </sql>
+
+    <select id="TaskRewardReceive_findByPager" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM task_reward_receive
+        <where>
+            <include refid="TaskRewardReceive_where_sql" />
+            <if test="searchProperty != null">
+                ${searchProperty} = #{searchValue}
+            </if>
+        </where>
+        <if test="orderProperty != null">
+            order by ${orderProperty} ${orderDirection}
+        </if>
+        <if test="start != null ">
+            <if test="start >= 0">
+                limit #{start}, #{limit}
+            </if>
+        </if>
+    </select>
+    <update id="UpdateByUuidAndUserCode">
+    	update task_reward_receive set finish_state=1
+    	where  task_uuid = #{taskUuid} and user_code=#{userCode}
+    </update>
+    <select id="findByTaskUuidAndUserCode" resultMap="BaseResultMap">
+    	 SELECT
+        <include refid="Base_Column_List" />
+        FROM task_reward_receive
+        where task_uuid = #{taskUuid} and user_code=#{userCode}
+    </select>
+</mapper>

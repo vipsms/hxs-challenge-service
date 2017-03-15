@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.MessageMapper">
+	<resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.Message">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="uuid" property="uuid" jdbcType="VARCHAR" />
+		<result column="message" property="message" jdbcType="VARCHAR" />
+		<result column="receive_user" property="receiveUser" jdbcType="VARCHAR" />
+		<result column="send_date" property="sendDate" jdbcType="TIMESTAMP" />
+		<result column="message_type" property="messageType" jdbcType="VARCHAR" />
+		<result column="send_user" property="sendUser" jdbcType="VARCHAR" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="read_state" property="readState" jdbcType="INTEGER" />
+		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, uuid, message, receive_user, send_date, message_type,
+		send_user,
+		create_date,
+		read_state, update_date
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from message
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		message
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="Message_save" parameterType="com.eeduspace.challenge.persist.po.Message">
+		insert into message (id, uuid,
+		message,
+		receive_user, send_date, message_type,
+		send_user, create_date,
+		read_state,
+		update_date)
+		values (#{id,jdbcType=BIGINT},
+		#{uuid,jdbcType=VARCHAR},
+		#{message,jdbcType=VARCHAR},
+		#{receiveUser,jdbcType=VARCHAR}, #{sendDate,jdbcType=TIMESTAMP},
+		#{messageType,jdbcType=VARCHAR},
+		#{sendUser,jdbcType=VARCHAR},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{readState,jdbcType=INTEGER},
+		#{updateDate,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.Message">
+		insert into message
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="uuid != null">
+				uuid,
+			</if>
+			<if test="message != null">
+				message,
+			</if>
+			<if test="receiveUser != null">
+				receive_user,
+			</if>
+			<if test="sendDate != null">
+				send_date,
+			</if>
+			<if test="messageType != null">
+				message_type,
+			</if>
+			<if test="sendUser != null">
+				send_user,
+			</if>
+			<if test="createDate != null">
+				create_date,
+			</if>
+			<if test="readState != null">
+				read_state,
+			</if>
+			<if test="updateDate != null">
+				update_date,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="uuid != null">
+				#{uuid,jdbcType=VARCHAR},
+			</if>
+			<if test="message != null">
+				#{message,jdbcType=VARCHAR},
+			</if>
+			<if test="receiveUser != null">
+				#{receiveUser,jdbcType=VARCHAR},
+			</if>
+			<if test="sendDate != null">
+				#{sendDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="messageType != null">
+				#{messageType,jdbcType=VARCHAR},
+			</if>
+			<if test="sendUser != null">
+				#{sendUser,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="readState != null">
+				#{readState,jdbcType=INTEGER},
+			</if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="Message_update" parameterType="com.eeduspace.challenge.persist.po.Message">
+		update message
+		<set>
+			<if test="uuid != null">
+				uuid = #{uuid,jdbcType=VARCHAR},
+			</if>
+			<if test="message != null">
+				message = #{message,jdbcType=VARCHAR},
+			</if>
+			<if test="receiveUser != null">
+				receive_user = #{receiveUser,jdbcType=VARCHAR},
+			</if>
+			<if test="sendDate != null">
+				send_date = #{sendDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="messageType != null">
+				message_type = #{messageType,jdbcType=VARCHAR},
+			</if>
+			<if test="sendUser != null">
+				send_user = #{sendUser,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				create_date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="readState != null">
+				read_state = #{readState,jdbcType=INTEGER},
+			</if>
+			<if test="updateDate != null">
+				update_date = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.Message">
+		update message
+		set
+		uuid = #{uuid,jdbcType=VARCHAR},
+		message = #{message,jdbcType=VARCHAR},
+		receive_user = #{receiveUser,jdbcType=VARCHAR},
+		send_date =
+		#{sendDate,jdbcType=TIMESTAMP},
+		message_type =
+		#{messageType,jdbcType=VARCHAR},
+		send_user =
+		#{sendUser,jdbcType=VARCHAR},
+		create_date =
+		#{createDate,jdbcType=TIMESTAMP},
+		read_state =
+		#{readState,jdbcType=INTEGER},
+		update_date =
+		#{updateDate,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+
+
+
+
+
+
+
+	<sql id="Message_where_sql">
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="uuid != null">
+		and	uuid = #{uuid}
+		</if>
+		<if test="message != null">
+		and	message = #{message}
+		</if>
+		<if test="receiveUser != null">
+		and	receive_user = #{receiveUser}
+		</if>
+		<if test="sendDate != null">
+		and	send_date = #{sendDate}
+		</if>
+		<if test="messageType != null">
+		and	message_type = #{messageType}
+		</if>
+		<if test="sendUser != null">
+		and	send_user = #{sendUser}
+		</if>
+		<if test="createDate != null">
+		and	create_date = #{createDate}
+		</if>
+		<if test="readState != null">
+		and	read_state = #{readState}
+		</if>
+		<if test="updateDate != null">
+		and	update_date = #{updateDate}
+		</if>
+	</sql>
+
+	<select id="Message_findByPager" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM message
+		<where>
+			<include refid="Message_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+		<if test="orderProperty != null">
+			order by ${orderProperty} ${orderDirection}
+		</if>
+		<if test="start != null ">
+			<if test="start >= 0">
+				limit #{start}, #{limit}
+			</if>
+		</if>
+	</select>
+
+	<select id="Message_findByPager_count" resultType="java.lang.Long">
+		select count(id) from message
+		<where>
+			<include refid="Message_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+	</select>
+
+</mapper>

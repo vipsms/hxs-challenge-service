@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.IntegralChangeMapper" >
+  <resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.IntegralChange" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="consume_integral" property="consumeIntegral" jdbcType="BIGINT" />
+    <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+    <result column="change_type" property="changeType" jdbcType="VARCHAR" />
+    <result column="change_name" property="changeName" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uuid, consume_integral, user_code, change_type, change_name, create_date,
+    update_date
+  </sql>
+  <select id="IntegralChange_getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from integral_change
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="IntegralChange_deleteById" parameterType="java.lang.Long" >
+    delete from integral_change
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="IntegralChange_save" parameterType="com.eeduspace.challenge.persist.po.IntegralChange" >
+    insert into integral_change (id, uuid, consume_integral, 
+      user_code, change_type, change_name, 
+      create_date, update_date
+      )
+    values (#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR}, #{consumeIntegral}, 
+      #{userCode,jdbcType=VARCHAR}, #{changeType,jdbcType=VARCHAR}, #{changeName,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.IntegralChange" >
+    insert into integral_change
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="consumeIntegral != null" >
+        consume_integral,
+      </if>
+      <if test="userCode != null" >
+        user_code,
+      </if>
+      <if test="changeType != null" >
+        change_type,
+      </if>
+      <if test="changeName != null" >
+        change_name,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="consumeIntegral != null" >
+        #{consumeIntegral},
+      </if>
+      <if test="userCode != null" >
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="changeType != null" >
+        #{changeType,jdbcType=VARCHAR},
+      </if>
+      <if test="changeName != null" >
+        #{changeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="IntegralChange_update" parameterType="com.eeduspace.challenge.persist.po.IntegralChange" >
+    update integral_change
+    <set >
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="consumeIntegral != null" >
+        consume_integral = #{consumeIntegral},
+      </if>
+      <if test="userCode != null" >
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="changeType != null" >
+        change_type = #{changeType,jdbcType=VARCHAR},
+      </if>
+      <if test="changeName != null" >
+        change_name = #{changeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.IntegralChange" >
+    update integral_change
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      consume_integral = #{consumeIntegral},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      change_type = #{changeType,jdbcType=VARCHAR},
+      change_name = #{changeName,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <sql id="IntegralChange_where_sql">
+        <if test="uuid != null" >
+            and uuid = #{uuid,jdbcType=VARCHAR}
+        </if>
+        <if test="consumeIntegral != null" >
+            and consume_integral = #{consumeIntegral}
+        </if>
+        <if test="userCode != null" >
+            and user_code = #{userCode,jdbcType=VARCHAR}
+        </if>
+        <if test="changeType != null" >
+            and change_type = #{changeType,jdbcType=VARCHAR}
+        </if>
+        <if test="changeName != null" >
+            and change_name = #{changeName,jdbcType=VARCHAR}
+        </if>
+        <if test="createDate != null" >
+            and create_date = #{createDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateDate != null" >
+            and update_date = #{updateDate,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+
+    <select id="IntegralChange_findByPager" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM integral_change
+        <where>
+            <include refid="IntegralChange_where_sql" />
+            <if test="searchProperty != null">
+                ${searchProperty} = #{searchValue}
+            </if>
+        </where>
+        <if test="orderProperty != null">
+            order by ${orderProperty} ${orderDirection}
+        </if>
+        <if test="start != null ">
+            <if test="start >= 0">
+                limit #{start}, #{limit}
+            </if>
+        </if>
+    </select>
+</mapper>

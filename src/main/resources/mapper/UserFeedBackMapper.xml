@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.UserFeedBackMapper" >
+  <resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.UserFeedBack" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+    <result column="message" property="message" jdbcType="VARCHAR" />
+    <result column="contact_information" property="contactInformation" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="reply_managerId" property="replyManagerid" jdbcType="VARCHAR" />
+    <result column="reply_date" property="replyDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uuid, user_code, message, contact_information, create_date, update_date, reply_managerId, 
+    reply_date
+  </sql>
+  
+  <sql id="UserFeedBack_where_sql">
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="uuid != null">
+			and uuid = #{uuid}
+		</if>
+		<if test="userCode != null">
+			and user_code = #{userCode}
+		</if>
+		<if test="message != null">
+			and message = #{message}
+		</if>
+		<if test="contactInformation != null">
+			and contact_information = #{contactInformation}
+		</if>
+		<if test="createDate != null">
+			and create_date = #{createDate}
+		</if>
+		<if test="updateDate != null">
+			and update_date = #{updateDate}
+		</if>
+		<if test="replyManagerId != null">
+			and  reply_managerId= #{replyManagerId}
+		</if>
+		<if test="replyDate != null">
+			and reply_date = #{replyDate}
+		</if>
+	</sql>
+  
+  
+  <select id="UserFeedBack_getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_feedback
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_feedback
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="UserFeedBack_save"  keyProperty="id" useGeneratedKeys="true"  >
+    insert into user_feedback ( uuid, user_code, 
+      message, contact_information, create_date, 
+      update_date, reply_managerId, reply_date
+      )
+    values ( #{uuid,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, 
+      #{message,jdbcType=VARCHAR}, #{contactInformation,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{replyManagerid,jdbcType=VARCHAR}, #{replyDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.UserFeedBack" >
+    insert into user_feedback
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="userCode != null" >
+        user_code,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+      <if test="contactInformation != null" >
+        contact_information,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="replyManagerid != null" >
+        reply_managerId,
+      </if>
+      <if test="replyDate != null" >
+        reply_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null" >
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="contactInformation != null" >
+        #{contactInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyManagerid != null" >
+        #{replyManagerid,jdbcType=VARCHAR},
+      </if>
+      <if test="replyDate != null" >
+        #{replyDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eeduspace.challenge.persist.po.UserFeedBack" >
+    update user_feedback
+    <set >
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null" >
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="contactInformation != null" >
+        contact_information = #{contactInformation,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyManagerid != null" >
+        reply_managerId = #{replyManagerid,jdbcType=VARCHAR},
+      </if>
+      <if test="replyDate != null" >
+        reply_date = #{replyDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="UserFeedBack_update" parameterType="com.eeduspace.challenge.persist.po.UserFeedBack" >
+    update user_feedback
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      message = #{message,jdbcType=VARCHAR},
+      contact_information = #{contactInformation,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      reply_managerId = #{replyManagerid,jdbcType=VARCHAR},
+      reply_date = #{replyDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+  
+  
+  
+    <select id="UserFeedBack_findByPager" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM user_feedback
+		<where>
+			<include refid="UserFeedBack_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+		<if test="orderProperty != null">
+			order by ${orderProperty} ${orderDirection}
+		</if>
+		<if test="start != null ">
+			<if test="start >= 0">
+				limit #{start}, #{limit}
+			</if>
+		</if>
+	</select>
+
+	<select id="UserFeedBack_findByPager_count" resultType="java.lang.Long">
+		select count(id) from user_feedback
+		<where>
+			<include refid="UserFeedBack_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+	</select>
+  
+  
+  
+  
+</mapper>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.UserTaskLogMapper" >
+  <resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.UserTaskLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="user_code" property="userCode" jdbcType="VARCHAR" />
+    <result column="module" property="module" jdbcType="VARCHAR" />
+    <result column="log_type" property="logType" jdbcType="VARCHAR" />
+    <result column="log_result" property="logResult" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="operate" property="operate" jdbcType="VARCHAR" />
+    <result column="concrete_task_code" property="concreteTaskCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uuid, user_code, module, log_type, log_result, create_date, operate, concrete_task_code
+  </sql>
+  <select id="UserTaskLog_getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_task_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="UserTaskLog_deleteById" parameterType="java.lang.Long" >
+    delete from user_task_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="UserTaskLog_save"  >
+    insert into user_task_log ( uuid, user_code, 
+      module, log_type, log_result, 
+      create_date, operate, concrete_task_code
+      )
+    values (#{uuid,jdbcType=VARCHAR}, #{userCode,jdbcType=VARCHAR}, 
+      #{module,jdbcType=VARCHAR}, #{logType,jdbcType=VARCHAR}, #{logResult,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{operate,jdbcType=VARCHAR}, #{concreteTaskCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.UserTaskLog" >
+    insert into user_task_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="userCode != null" >
+        user_code,
+      </if>
+      <if test="module != null" >
+        module,
+      </if>
+      <if test="logType != null" >
+        log_type,
+      </if>
+      <if test="logResult != null" >
+        log_result,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="operate != null" >
+        operate,
+      </if>
+      <if test="concreteTaskCode != null" >
+        concrete_task_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null" >
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="module != null" >
+        #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="logType != null" >
+        #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="logResult != null" >
+        #{logResult,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operate != null" >
+        #{operate,jdbcType=VARCHAR},
+      </if>
+      <if test="concreteTaskCode != null" >
+        #{concreteTaskCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eeduspace.challenge.persist.po.UserTaskLog" >
+    update user_task_log
+    <set >
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="userCode != null" >
+        user_code = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="module != null" >
+        module = #{module,jdbcType=VARCHAR},
+      </if>
+      <if test="logType != null" >
+        log_type = #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="logResult != null" >
+        log_result = #{logResult,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operate != null" >
+        operate = #{operate,jdbcType=VARCHAR},
+      </if>
+      <if test="concreteTaskCode != null" >
+        concrete_task_code = #{concreteTaskCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="UserTaskLog_update" parameterType="com.eeduspace.challenge.persist.po.UserTaskLog" >
+    update user_task_log
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      user_code = #{userCode,jdbcType=VARCHAR},
+      module = #{module,jdbcType=VARCHAR},
+      log_type = #{logType,jdbcType=VARCHAR},
+      log_result = #{logResult,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      operate = #{operate,jdbcType=VARCHAR},
+      concrete_task_code = #{concreteTaskCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+   
+ <sql id="UserTaskLog_where_sql">
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="uuid != null">
+			and uuid = #{uuid}
+		</if>
+		<if test="module != null">
+			and module = #{module}
+		</if>
+		<if test="userCode != null">
+			and "user_code" = #{userCode}
+		</if>
+		<if test="logType != null">
+			and log_type = #{logType}
+		</if>
+		<if test="createDate != null">
+			and create_date = #{createDate}
+		</if>
+		<if test="logResult != null">
+			and  log_result= #{logResult}
+		</if>
+		<if test="operate != null">
+			and operate = #{operate}
+		</if>
+		<if test="concreteTaskCode != null">
+			and  concrete_task_code= #{concreteTaskCode}
+		</if>
+	</sql>
+     <select id="UserTaskLog_findByPager" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM user_task_log
+		<where>
+			<include refid="UserTaskLog_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+		<if test="orderProperty != null">
+			order by ${orderProperty} ${orderDirection}
+		</if>
+		<if test="start != null ">
+			<if test="start >= 0">
+				limit #{start}, #{limit}
+			</if>
+		</if>
+	</select>
+
+	<select id="UserTaskLog_findByPager_count" resultType="java.lang.Long">
+		select count(id) from user_task_log
+		<where>
+			<include refid="UserTaskLog_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+	</select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</mapper>

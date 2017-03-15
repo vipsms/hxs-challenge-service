@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.QuestionMapper">
+	<resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.Question">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="uuid" property="uuid" jdbcType="VARCHAR" />
+		<result column="paper_UUID" property="paperUuid" jdbcType="VARCHAR" />
+		<result column="question_uuid" property="questionUuid"
+			jdbcType="VARCHAR" />
+		<result column="question_stem" property="questionStem"
+			jdbcType="VARCHAR" />
+		<result column="quesion_option" property="quesionOption"
+			jdbcType="VARCHAR" />
+		<result column="right_option" property="rightOption" jdbcType="VARCHAR" />
+		<result column="question_analysis" property="questionAnalysis"
+			jdbcType="VARCHAR" />
+		<result column="score" property="score" jdbcType="DOUBLE" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+
+		<result column="question_type" property="questionType"
+			jdbcType="VARCHAR" />
+		<result column="subject_code" property="subjectCode" jdbcType="VARCHAR" />
+		<result column="subject_name" property="subjectName" jdbcType="VARCHAR" />
+		<result column="unit_code" property="unitCode" jdbcType="VARCHAR" />
+		<result column="grade_code" property="gradeCode" jdbcType="VARCHAR" />
+		<result column="difficult_star" property="difficultStar"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, uuid, paper_UUID, question_uuid, question_stem,
+		quesion_option,
+		right_option,
+		question_analysis, score, create_date,
+		update_date,question_type,subject_code,subject_name,unit_code,grade_code,difficult_star
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from question_info
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		question_info
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="Question_save" parameterType="com.eeduspace.challenge.persist.po.Question">
+		insert into
+		question_info (id, uuid, paper_UUID,
+		question_uuid, question_stem,
+		quesion_option,
+		right_option, question_analysis, score,
+		create_date,
+		update_date,question_type,subject_code,subject_name,unit_code,grade_code,difficult_star)
+		values (#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR},
+		#{paperUuid,jdbcType=VARCHAR},
+		#{questionUuid,jdbcType=VARCHAR},
+		#{questionStem,jdbcType=VARCHAR}, #{quesionOption,jdbcType=VARCHAR},
+		#{rightOption,jdbcType=VARCHAR}, #{questionAnalysis,jdbcType=VARCHAR},
+		#{score,jdbcType=DOUBLE},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{updateDate,jdbcType=TIMESTAMP},#{questionType,jdbcType=VARCHAR},#{subjectCode,jdbcType=VARCHAR},#{subjectName,jdbcType=VARCHAR},#{unitCode,jdbcType=VARCHAR},#{gradeCode,jdbcType=VARCHAR},#{difficultStar,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.Question">
+		insert into question_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="uuid != null">
+				uuid,
+			</if>
+			<if test="paperUuid != null">
+				paper_UUID,
+			</if>
+			<if test="questionUuid != null">
+				question_uuid,
+			</if>
+			<if test="questionStem != null">
+				question_stem,
+			</if>
+			<if test="quesionOption != null">
+				quesion_option,
+			</if>
+			<if test="rightOption != null">
+				right_option,
+			</if>
+			<if test="questionAnalysis != null">
+				question_analysis,
+			</if>
+			<if test="score != null">
+				score,
+			</if>
+			<if test="createDate != null">
+				create_date,
+			</if>
+			<if test="updateDate != null">
+				update_date,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="uuid != null">
+				#{uuid,jdbcType=VARCHAR},
+			</if>
+			<if test="paperUuid != null">
+				#{paperUuid,jdbcType=VARCHAR},
+			</if>
+			<if test="questionUuid != null">
+				#{questionUuid,jdbcType=VARCHAR},
+			</if>
+			<if test="questionStem != null">
+				#{questionStem,jdbcType=VARCHAR},
+			</if>
+			<if test="quesionOption != null">
+				#{quesionOption,jdbcType=VARCHAR},
+			</if>
+			<if test="rightOption != null">
+				#{rightOption,jdbcType=VARCHAR},
+			</if>
+			<if test="questionAnalysis != null">
+				#{questionAnalysis,jdbcType=VARCHAR},
+			</if>
+			<if test="score != null">
+				#{score,jdbcType=DOUBLE},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="Question_update" parameterType="com.eeduspace.challenge.persist.po.Question">
+		update question_info
+		<set>
+			<if test="uuid != null">
+				uuid = #{uuid,jdbcType=VARCHAR},
+			</if>
+			<if test="paperUuid != null">
+				paper_UUID = #{paperUuid,jdbcType=VARCHAR},
+			</if>
+			<if test="questionUuid != null">
+				question_uuid = #{questionUuid,jdbcType=VARCHAR},
+			</if>
+			<if test="questionStem != null">
+				question_stem = #{questionStem,jdbcType=VARCHAR},
+			</if>
+			<if test="quesionOption != null">
+				quesion_option = #{quesionOption,jdbcType=VARCHAR},
+			</if>
+			<if test="rightOption != null">
+				right_option = #{rightOption,jdbcType=VARCHAR},
+			</if>
+			<if test="questionAnalysis != null">
+				question_analysis = #{questionAnalysis,jdbcType=VARCHAR},
+			</if>
+			<if test="score != null">
+				score = #{score,jdbcType=DOUBLE},
+			</if>
+			<if test="createDate != null">
+				create_date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				update_date = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+
+
+			<if test="questionType != null">
+				question_type = #{questionType,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectCode != null">
+				subject_code = #{subjectCode,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectName != null">
+				subject_name = #{subjectName,jdbcType=VARCHAR},
+			</if>
+			<if test="unitCode != null">
+				unit_code = #{unitCode,jdbcType=VARCHAR},
+			</if>
+			<if test="gradeCode != null">
+				grade_code = #{gradeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="difficultStar != null">
+				difficult_star = #{difficultStar,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.Question">
+		update
+		question_info
+		set uuid = #{uuid,jdbcType=VARCHAR},
+		paper_UUID =
+		#{paperUuid,jdbcType=VARCHAR},
+		question_uuid =
+		#{questionUuid,jdbcType=VARCHAR},
+		question_stem =
+		#{questionStem,jdbcType=VARCHAR},
+		quesion_option =
+		#{quesionOption,jdbcType=VARCHAR},
+		right_option =
+		#{rightOption,jdbcType=VARCHAR},
+		question_analysis =
+		#{questionAnalysis,jdbcType=VARCHAR},
+		score = #{score,jdbcType=DOUBLE},
+		create_date = #{createDate,jdbcType=TIMESTAMP},
+		update_date =
+		#{updateDate,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+
+
+	<sql id="Question_where_sql">
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="uuid != null">
+			and uuid = #{uuid}
+		</if>
+		<if test="paperUuid != null">
+			and paper_UUID = #{paperUuid}
+		</if>
+		<if test="questionUuid != null">
+			and question_uuid = #{questionUuid}
+		</if>
+		<if test="questionStem != null">
+			and question_stem = #{questionStem}
+		</if>
+		<if test="quesionOption != null">
+			and quesion_option = #{quesionOption}
+		</if>
+		<if test="rightOption != null">
+			and right_option = #{rightOption}
+		</if>
+		<if test="questionAnalysis != null">
+			and question_analysis = #{questionAnalysis}
+		</if>
+		<if test="score != null">
+			and score = #{score}
+		</if>
+		<if test="createDate != null">
+			and create_date = #{createDate}
+		</if>
+		<if test="updateDate != null">
+			and update_date = #{updateDate}
+		</if>
+
+		<if test="questionType != null">
+			and question_type = #{questionType,jdbcType=VARCHAR}
+		</if>
+		<if test="subjectCode != null">
+			and subject_code = #{subjectCode,jdbcType=VARCHAR}
+		</if>
+		<if test="subjectName != null">
+			and subject_name = #{subjectName,jdbcType=VARCHAR}
+		</if>
+		<if test="unitCode != null">
+			and unit_code = #{unitCode,jdbcType=VARCHAR}
+		</if>
+		<if test="gradeCode != null">
+			and grade_code = #{gradeCode,jdbcType=VARCHAR}
+		</if>
+		<if test="difficultStar != null">
+			and difficult_star = #{difficultStar,jdbcType=VARCHAR}
+		</if>
+	</sql>
+
+	<select id="Question_findByPager" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM question_info
+		<where>
+			<include refid="Question_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+		<if test="orderProperty != null">
+			order by ${orderProperty} ${orderDirection}
+		</if>
+		<if test="start != null ">
+			<if test="start >= 0">
+				limit #{start}, #{limit}
+			</if>
+		</if>
+	</select>
+
+	<!-- 查询用户未做的试题 -->
+	<select id="get_not_done_question" resultMap="BaseResultMap">
+		SELECT * FROM
+		question_info WHERE
+		paper_UUID=#{paperUUID} and question_uuid not IN
+		(SELECT question_uuid FROM user_answer where user_code=#{userCode} and
+		paper_uuid=#{paperUUID} and
+		fight_record_uuid=#{fightUUID})
+	</select>
+	<!-- 获取试题最大题号 -->
+	<select id="get_max_quesionSn" resultType="java.lang.Long">
+
+		SELECT MAX(question_sn) FROM user_answer where
+		fight_record_uuid=#{fightUUID}
+
+	</select>
+	<select id="Question_findByPager_count" resultType="java.lang.Long">
+		select count(id) from question_info
+		<where>
+			<include refid="Question_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+	</select>
+</mapper>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.UserFriendApplyMapper">
+    <resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.UserFriendApply">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="my_user_code" property="myUserCode" jdbcType="VARCHAR"/>
+        <result column="uuid" property="uuid" jdbcType="VARCHAR"/>
+        <result column="friend_code" property="friendCode" jdbcType="VARCHAR"/>
+        <result column="apply_state" property="applyState" jdbcType="VARCHAR"/>
+        <result column="apply_source" property="applySource" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, my_user_code,uuid, friend_code,apply_state , apply_source , create_date, update_date
+  </sql>
+    <select id="UserFriendApply_getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from user_friend_apply
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="findByApplyUuid" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from user_friend_apply
+        where uuid = #{uuid,jdbcType=VARCHAR}
+    </select>
+    <delete id="UserFriendApply_deleteById" parameterType="java.lang.Long">
+    delete from user_friend_apply
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="UserFriendApply_save" parameterType="com.eeduspace.challenge.persist.po.UserFriendApply" keyProperty="id" useGeneratedKeys="true">
+    insert into user_friend_apply (id,uuid, my_user_code, friend_code,apply_state,apply_source,
+      create_date, update_date)
+    values (#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR},  #{myUserCode,jdbcType=VARCHAR}, #{friendCode,jdbcType=VARCHAR},
+      #{applyState,jdbcType=VARCHAR}, #{applySource,jdbcType=VARCHAR},
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.UserFriendApply" keyProperty="id" useGeneratedKeys="true">
+        insert into user_friend_apply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="myUserCode != null">
+                my_user_code,
+            </if>
+            <if test="friendCode != null">
+                friend_code,
+            </if>
+            <if test="applyState != null">
+                apply_state,
+            </if>
+            <if test="applySource != null">
+                apply_source,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="myUserCode != null">
+                #{myUserCode,jdbcType=VARCHAR},
+            </if>
+            <if test="friendCode != null">
+                #{friendCode,jdbcType=VARCHAR},
+            </if>
+            <if test="applyState != null">
+                #{applyState,jdbcType=VARCHAR},
+            </if>
+            <if test="applySource != null">
+                #{applySource,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="UserFriendApply_update" parameterType="com.eeduspace.challenge.persist.po.UserFriendApply">
+        update user_friend_apply
+        <set>
+            <if test="myUserCode != null">
+                my_user_code = #{myUserCode,jdbcType=VARCHAR},
+            </if>
+            <if test="friendCode != null">
+                friend_code = #{friendCode,jdbcType=VARCHAR},
+            </if>
+            <if test="applyState != null">
+                apply_state = #{applyState,jdbcType=VARCHAR},
+            </if>
+            <if test="applySource != null">
+                apply_source = #{applySource,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.UserFriendApply">
+    update user_friend_apply
+    set my_user_code = #{myUserCode,jdbcType=VARCHAR},
+      friend_code = #{friendCode,jdbcType=VARCHAR},
+      apply_state = #{applyState,jdbcType=VARCHAR},
+      apply_source = #{applySource,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <sql id="UserFriendApply_where_sql">
+
+        <if test="uuid != null">
+            and uuid = #{uuid,jdbcType=VARCHAR}
+        </if>
+        <if test="myUserCode != null">
+            and my_user_code = #{myUserCode,jdbcType=VARCHAR}
+        </if>
+        <if test="friendCode != null">
+            and friend_code = #{friendCode,jdbcType=VARCHAR}
+        </if>
+        <if test="applyState != null">
+            and apply_state = #{applyState,jdbcType=VARCHAR}
+        </if>
+        <if test="applySource != null">
+            and apply_source = #{applySource,jdbcType=VARCHAR}
+        </if>
+        <if test="createDate != null">
+            and create_date = #{createDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateDate != null">
+            and update_date = #{updateDate,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+
+    <select id="UserFriendApply_findByPager" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user_friend_apply
+        <where>
+            <include refid="UserFriendApply_where_sql" />
+            <if test="searchProperty != null">
+                ${searchProperty} = #{searchValue}
+            </if>
+        </where>
+        <if test="orderProperty != null">
+            order by ${orderProperty} ${orderDirection}
+        </if>
+        <if test="start != null ">
+            <if test="start >= 0">
+                limit #{start}, #{limit}
+            </if>
+        </if>
+    </select>
+
+</mapper>

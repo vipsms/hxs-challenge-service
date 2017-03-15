@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.WeeklyRankingMapper">
+	<resultMap id="BaseResultMap"
+		type="com.eeduspace.challenge.persist.po.WeeklyRanking">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="uuid" property="uuid" jdbcType="VARCHAR" />
+		<result column="user_code" property="userCode" jdbcType="VARCHAR" />
+		<result column="rank" property="rank" jdbcType="DOUBLE" />
+		<result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+		<result column="week_fight_value" property="weekFightValue"
+			jdbcType="BIGINT" />
+		<result column="week_integral" property="weekIntegral"
+			jdbcType="BIGINT" />
+		<result column="subject_code" property="subjectCode" jdbcType="VARCHAR" />
+		<result column="grade_code" property="gradeCode" jdbcType="VARCHAR" />
+		<result column="unit_code" property="unitCode" jdbcType="VARCHAR" />
+		<result column="volume_code" property="volumeCode" jdbcType="VARCHAR" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, uuid, user_code, rank, nick_name, week_fight_value,
+		week_integral,
+		subject_code,
+		grade_code, unit_code, volume_code,
+		create_date, update_date
+	</sql>
+
+
+	<select id="WeeklyRanking_getById" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from weekly_ranking
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="WeeklyRanking_deleteById" parameterType="java.lang.Long">
+		delete from
+		weekly_ranking
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="WeeklyRanking_save">
+		insert into weekly_ranking
+		(id,
+		uuid, user_code,
+		rank,
+		nick_name, week_fight_value,
+		week_integral,
+		subject_code, grade_code,
+		unit_code, volume_code, create_date,
+		update_date)
+		values
+		(#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR},
+		#{userCode,jdbcType=VARCHAR},
+		#{rank,jdbcType=DOUBLE},
+		#{nickName,jdbcType=VARCHAR}, #{weekFightValue,jdbcType=DOUBLE},
+		#{weekIntegral,jdbcType=DOUBLE}, #{subjectCode,jdbcType=VARCHAR},
+		#{gradeCode,jdbcType=VARCHAR},
+		#{unitCode,jdbcType=VARCHAR},
+		#{volumeCode,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
+		#{updateDate,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.WeeklyRanking">
+		insert into weekly_ranking
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="uuid != null">
+				uuid,
+			</if>
+			<if test="userCode != null">
+				user_code,
+			</if>
+			<if test="rank != null">
+				rank,
+			</if>
+			<if test="nickName != null">
+				nick_name,
+			</if>
+			<if test="weekFightValue != null">
+				week_fight_value,
+			</if>
+			<if test="weekIntegral != null">
+				week_integral,
+			</if>
+			<if test="subjectCode != null">
+				subject_code,
+			</if>
+			<if test="gradeCode != null">
+				grade_code,
+			</if>
+			<if test="unitCode != null">
+				unit_code,
+			</if>
+			<if test="volumeCode != null">
+				volume_code,
+			</if>
+			<if test="createDate != null">
+				create_date,
+			</if>
+			<if test="updateDate != null">
+				update_date,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="uuid != null">
+				#{uuid,jdbcType=VARCHAR},
+			</if>
+			<if test="userCode != null">
+				#{userCode,jdbcType=VARCHAR},
+			</if>
+			<if test="rank != null">
+				#{rank,jdbcType=DOUBLE},
+			</if>
+			<if test="nickName != null">
+				#{nickName,jdbcType=VARCHAR},
+			</if>
+			<if test="weekFightValue != null">
+				#{weekFightValue,jdbcType=DOUBLE},
+			</if>
+			<if test="weekIntegral != null">
+				#{weekIntegral,jdbcType=DOUBLE},
+			</if>
+			<if test="subjectCode != null">
+				#{subjectCode,jdbcType=VARCHAR},
+			</if>
+			<if test="gradeCode != null">
+				#{gradeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="unitCode != null">
+				#{unitCode,jdbcType=VARCHAR},
+			</if>
+			<if test="volumeCode != null">
+				#{volumeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="WeeklyRanking_update">
+		update weekly_ranking
+		<set>
+			<if test="uuid != null">
+				uuid = #{uuid,jdbcType=VARCHAR},
+			</if>
+			<if test="userCode != null">
+				user_code = #{userCode,jdbcType=VARCHAR},
+			</if>
+			<if test="rank != null">
+				rank = #{rank,jdbcType=DOUBLE},
+			</if>
+			<if test="nickName != null">
+				nick_name = #{nickName,jdbcType=VARCHAR},
+			</if>
+			<if test="weekFightValue != null">
+				week_fight_value = #{weekFightValue},
+			</if>
+			<if test="weekIntegral != null">
+				week_integral = #{weekIntegral,jdbcType=DOUBLE},
+			</if>
+			<if test="subjectCode != null">
+				subject_code = #{subjectCode,jdbcType=VARCHAR},
+			</if>
+			<if test="gradeCode != null">
+				grade_code = #{gradeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="unitCode != null">
+				unit_code = #{unitCode,jdbcType=VARCHAR},
+			</if>
+			<if test="volumeCode != null">
+				volume_code = #{volumeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				create_date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				update_date = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.WeeklyRanking">
+		update
+		weekly_ranking
+		set uuid = #{uuid,jdbcType=VARCHAR},
+		user_code =
+		#{userCode,jdbcType=VARCHAR},
+		rank = #{rank,jdbcType=DOUBLE},
+		nick_name
+		= #{nickName,jdbcType=VARCHAR},
+		week_fight_value =
+		#{weekFightValue},
+		week_integral =
+		#{weekIntegral,jdbcType=DOUBLE},
+		subject_code =
+		#{subjectCode,jdbcType=VARCHAR},
+		grade_code =
+		#{gradeCode,jdbcType=VARCHAR},
+		unit_code =
+		#{unitCode,jdbcType=VARCHAR},
+		volume_code =
+		#{volumeCode,jdbcType=VARCHAR},
+		create_date =
+		#{createDate,jdbcType=TIMESTAMP},
+		update_date =
+		#{updateDate,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+
+
+
+	<sql id="WeeklyRanking_where_sql">
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="uuid != null">
+			and uuid = #{uuid}
+		</if>
+		<if test="userCode != null">
+			and user_code = #{userCode}
+		</if>
+		<if test="rank != null">
+			and rank = #{rank}
+		</if>
+		<if test="nickName != null">
+			and nick_name = #{nickName}
+		</if>
+		<if test="weekFightValue != null">
+			and week_fight_value = #{weekFightValue}
+		</if>
+		<if test="weekIntegral != null">
+			and week_integral = #{weekIntegral}
+		</if>
+		<if test="subjectCode != null">
+			and subject_code = #{subjectCode}
+		</if>
+		<if test="gradeCode != null">
+			and grade_code = #{gradeCode}
+		</if>
+		<if test="unitCode != null">
+			and unit_code = #{unitCode}
+		</if>
+		<if test="volumeCode != null">
+			and volume_code = #{volumeCode}
+		</if>
+		<if test="createDate != null">
+			and create_date = #{createDate}
+		</if>
+		<if test="updateDate != null">
+			and update_date = #{updateDate}
+		</if>
+	</sql>
+
+	<select id="WeeklyRanking_findByPager" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM weekly_ranking
+		<where>
+			<include refid="WeeklyRanking_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+		<if test="orderProperty != null">
+			order by ${orderProperty} ${orderDirection} ,create_date
+			ASC
+		</if>
+		<if test="start != null ">
+			<if test="start >= 0">
+				limit #{start}, #{limit}
+			</if>
+		</if>
+	</select>
+
+	<select id="WeeklyRanking_findByPager_count" resultType="java.lang.Long">
+		select count(id) from weekly_ranking
+		<where>
+			<include refid="WeeklyRanking_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+	</select>
+	<!-- 设置统计排名变量 -->
+	<select id="set_rank" resultType="String">
+		set @rowNum=0;
+	</select>
+	<!-- 统计用户当前排名 执行前需要先执行 set_rank -->
+	<select id="count_user_current_rank" resultMap="WeeklyRankingModelMap">
+		<!-- select rank ,user_code,nick_name from ( select (@rowNum := @rowNum 
+			+ 1) as rank ,user_code,nick_name from weekly_ranking order by week_fight_value 
+			DESC ) as A where A.user_code=#{userCode} LIMIT 1 -->
+		select rank
+		,user_code,nick_name,subject_code,grade_code from (
+		select
+		(@rowNum := @rowNum + 1) as rank
+		,user_code,nick_name,subject_code,grade_code
+		from weekly_ranking where
+		subject_code=#{subjectCode} and grade_code=#{gradeCode} order by
+		week_fight_value DESC
+		) as A,(SELECT @rownum:=0) r
+		where subject_code=#{subjectCode} and
+		grade_code=#{gradeCode} and user_code=#{userCode};
+	</select>
+	<!-- 统计用户在好友中当前的排名 执行前需要先执行 set_rank -->
+	<select id="count_user_current_rank_in_friend" resultMap="WeeklyRankingModelMap">
+		select
+		rank ,user_code,nick_name,week_fight_value from(
+		select (@rowNum :=
+		@rowNum + 1) as rank ,a.user_code,a.nick_name,a.week_fight_value
+		from
+		(SELECT
+		t.* FROM weekly_ranking t,user_friend t1 where
+		t1.friend_code=t.user_code and t1.my_user_code=#{userCode} and
+		t.subject_code=#{subjectCode} and t.grade_code=#{gradeCode} ORDER BY
+		t.week_fight_value DESC) as a , (SELECT @rownum:=0) r ) as b where b.user_code=#{userCode}
+	</select>
+	<!-- 用户好友排行榜 -->
+	<select id="user_friend_rank" resultMap="WeekRankingModel">
+		SELECT w.week_fight_value,u.head_img_url,u.nick_name,u.user_code FROM
+		weekly_ranking w,user_friend uf ,user_info u where
+		uf.friend_code=w.user_code and u.user_code=uf.friend_code and
+		uf.my_user_code=#{userCode}
+		<if test="subjectCode != null">
+			and w.subject_code=#{subjectCode}
+		</if>
+		<if test="gradeCode != null">
+			and w.grade_code=#{gradeCode}
+		</if>
+		<if test="unitCode != null">
+			and w.unit_code=#{unitCode}
+		</if>
+		<if test="volumeCode != null">
+			and w.volume_code=#{volumeCode}
+		</if>
+		ORDER BY
+		w.week_fight_value DESC LIMIT #{start} , #{end}
+	</select>
+	<!-- 学科排行榜 -->
+	<select id="subject_user_rank" resultMap="RankModelMap">
+		SELECT
+		week_fight_value,subject_code,grade_code
+		,info.head_img_url,info.nick_name,u.is_vip,u.user_name,u.vip_end_date,info.user_code    
+    FROM (SELECT *
+		FROM `weekly_ranking` where subject_code='5' GROUP BY
+		grade_code
+		,user_code ORDER BY week_fight_value DESC,create_date ASC)
+		as
+		bs,`user` u,user_info info where bs.user_code=u.user_code and
+		u.user_code=info.user_code and bs.week_fight_value in (SELECT MAX(week_fight_value) FROM weekly_ranking GROUP BY grade_code ) ORDER BY
+		week_fight_value DESC, bs.update_date ASC;
+
+	</select>
+	<!-- 根据学科学年分组 查询学科学年code -->
+	<select id="find_subjectandgrade" resultMap="BaseResultMap">
+		SELECT
+		subject_code,grade_code FROM weekly_ranking GROUP BY
+		subject_code,grade_code
+	</select>
+
+
+	<!-- 将weeklyranking 中的 战斗力值清空 -->
+	<update id="updateWeekFight">
+		update
+		weekly_ranking set
+		week_fight_value =0,
+		week_integral =0
+	</update>
+
+	<!-- 实时排行榜榜单信息 -->
+	<select id="find_challenge_ranking" resultMap="WeekRankingModel">
+		SELECT
+		w.week_fight_value,u.head_img_url,u.nick_name,u.user_code,us.mobile,us.is_vip  FROM
+		weekly_ranking w,user_info u,`user` us where w.user_code=u.user_code
+		and us.user_code=w.user_code and
+		w.grade_code=#{gradeCode} and
+		subject_code=#{subjectCode} ORDER BY week_fight_value
+		DESC LIMIT
+		#{start},#{end}
+	</select>
+
+	<!-- 根据学科获取所有的年级 -->
+	<select id="find_max_grade_code" resultType="java.lang.String">
+		SELECT DISTINCT grade_code FROM weekly_ranking WHERE subject_code=#{subjectCode};
+		
+	</select>
+	<resultMap type="com.eeduspace.challenge.model.weeklyrank.WeekRankingModel"
+		id="WeekRankingModel">
+		<result column="week_fight_value" property="weekFightValueFloat" />
+		<result column="first" property="championTimes" />
+		<result column="head_img_url" property="headImgUrl" />
+		<result column="nick_name" property="nickName" />
+		<result column="user_code" property="userCode" />
+	</resultMap>
+
+	<resultMap type="com.eeduspace.challenge.model.weeklyrank.RankModel" id="RankModelMap">
+		<result column="week_fight_value" property="weekFightValue" />
+		<result column="subject_code" property="subjectCode" />
+		<result column="grade_code" property="gradeCode" />
+		<result column="head_img_url" property="headImgUrl" />
+		<result column="is_vip" property="isVip" />
+		<result column="nick_name" property="nickName" />
+		<result column="user_code" property="userCode" />
+		<result column="vip_end_date" property="vipEndTime" />
+	</resultMap>
+	<resultMap type="com.eeduspace.challenge.model.weeklyrank.WeeklyRankingModel"
+		id="WeeklyRankingModelMap">
+		<result column="rank" property="rank" />
+		<result column="nick_name" property="nickName" />
+		<result column="user_code" property="userCode" />
+	</resultMap>
+	
+	<select id="getCurrentCountTotal" parameterType="java.lang.String" resultType="java.lang.Long">
+		select count(*)
+		from weekly_ranking
+		where subject_code = #{subjectCode} and grade_code = #{gradeCode}
+	</select>
+	
+	<select id="getHxsTvNationalRank" resultMap="WeekRankingModel" >
+		SELECT
+			(@rowNum:=@rowNum + 1) AS ranking,
+			t.*
+		FROM
+			(
+				SELECT
+					w.week_fight_value,
+					u.head_img_url,
+					u.nick_name,
+					u.user_code,
+					us.mobile,
+					us.is_vip
+				FROM
+					weekly_ranking w
+				JOIN user_info u ON w.user_code = u.user_code
+				JOIN `user` us ON us.user_code = w.user_code
+				WHERE
+					w.grade_code = #{gradeCode}
+				AND w.subject_code = #{subjectCode}
+				ORDER BY
+					w.week_fight_value DESC
+				LIMIT 0, #{showNum}
+			) t
+		JOIN (SELECT(@rowNum := 0)) temp
+	</select>
+	
+	<select id="UserNationalRankingForTv" resultMap="WeekRankingModel">
+		SELECT w.week_fight_value, u.head_img_url, u.nick_name, u.user_code, us.mobile, us.is_vip
+		FROM weekly_ranking w join user_info u on w.user_code = u.user_code
+		join `user` us on us.user_code = w.user_code
+		where w.grade_code = #{gradeCode} and w.subject_code = #{subjectCode} and us.mobile = #{mobile}
+	</select>
+	
+	<select id="UserNationalRanking" resultMap="WeekRankingModel">
+		SELECT w.week_fight_value, u.head_img_url, u.nick_name, u.user_code, us.mobile, us.is_vip
+		FROM weekly_ranking w join user_info u on w.user_code = u.user_code
+		join `user` us on us.user_code = w.user_code
+		where w.grade_code = #{gradeCode} and w.subject_code = #{subjectCode} and us.user_code = #{userCode}
+	</select>
+	
+	<select id="getFriendTop" resultMap="WeekRankingModel">
+		SELECT
+			(@rowNum:=@rowNum + 1) AS ranking,
+			t.*
+		FROM
+			(
+				SELECT
+					w.week_fight_value,
+					u.head_img_url,
+					u.nick_name,
+					u.user_code
+				FROM
+					weekly_ranking w,
+					user_friend uf,
+					user_info u,
+					`user` us
+				WHERE
+					u.user_code = uf.friend_code AND w.user_code = uf.friend_code
+					AND w.subject_code = #{subjectCode} and w.grade_code = #{gradeCode} AND uf.my_user_code = us.user_code AND us.mobile = #{mobile}
+				ORDER BY
+					w.week_fight_value DESC
+				LIMIT 0, 12
+			) t
+		JOIN (SELECT(@rowNum := 0)) temp
+	</select>
+</mapper>

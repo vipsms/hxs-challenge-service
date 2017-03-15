@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.WeeklyChartMapper">
+	<resultMap id="BaseResultMap"
+		type="com.eeduspace.challenge.persist.po.WeeklyChart">
+		<id column="id" property="id" jdbcType="BIGINT" />
+		<result column="uuid" property="uuid" jdbcType="VARCHAR" />
+		<result column="champion_user_code" property="championUserCode"
+			jdbcType="VARCHAR" />
+		<result column="champion_nick_name" property="championNickName"
+			jdbcType="VARCHAR" />
+		<result column="all_week" property="allWeek" jdbcType="BIGINT" />
+		<result column="second_user_code" property="secondUserCode"
+			jdbcType="VARCHAR" />
+		<result column="third_user_code" property="thirdUserCode"
+			jdbcType="VARCHAR" />
+		<result column="subject_code" property="subjectCode" jdbcType="VARCHAR" />
+		<result column="grade_code" property="gradeCode" jdbcType="VARCHAR" />
+		<result column="volume_code" property="volumeCode" jdbcType="VARCHAR" />
+		<result column="unit_code" property="unitCode" jdbcType="VARCHAR" />
+		<result column="few_week" property="fewWeek" jdbcType="DOUBLE" />
+		<result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+		<result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, uuid, champion_user_code, champion_nick_name, all_week,
+		second_user_code, third_user_code,
+		subject_code, grade_code,
+		volume_code, unit_code, few_week, create_date,
+		update_date
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from weekly_chart
+		where id = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		weekly_chart
+		where id = #{id,jdbcType=BIGINT}
+	</delete>
+	<insert id="WeeklyChart_save" parameterType="com.eeduspace.challenge.persist.po.WeeklyChart"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into weekly_chart (id,
+		uuid, champion_user_code,
+		champion_nick_name, all_week,
+		second_user_code,
+		third_user_code, subject_code, grade_code,
+		volume_code, unit_code, few_week,
+		create_date, update_date)
+		values
+		(#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR},
+		#{championUserCode,jdbcType=VARCHAR},
+		#{championNickName,jdbcType=VARCHAR}, #{allWeek,jdbcType=BIGINT},
+		#{secondUserCode,jdbcType=VARCHAR},
+		#{thirdUserCode,jdbcType=VARCHAR},
+		#{subjectCode,jdbcType=VARCHAR}, #{gradeCode,jdbcType=VARCHAR},
+		#{volumeCode,jdbcType=VARCHAR}, #{unitCode,jdbcType=VARCHAR},
+		#{fewWeek,jdbcType=DOUBLE},
+		#{createDate,jdbcType=TIMESTAMP},
+		#{updateDate,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.WeeklyChart">
+		insert into weekly_chart
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="uuid != null">
+				uuid,
+			</if>
+			<if test="championUserCode != null">
+				champion_user_code,
+			</if>
+			<if test="championNickName != null">
+				champion_nick_name,
+			</if>
+			<if test="allWeek != null">
+				all_week,
+			</if>
+			<if test="secondUserCode != null">
+				second_user_code,
+			</if>
+			<if test="thirdUserCode != null">
+				third_user_code,
+			</if>
+			<if test="subjectCode != null">
+				subject_code,
+			</if>
+			<if test="gradeCode != null">
+				grade_code,
+			</if>
+			<if test="volumeCode != null">
+				volume_code,
+			</if>
+			<if test="unitCode != null">
+				unit_code,
+			</if>
+			<if test="fewWeek != null">
+				few_week,
+			</if>
+			<if test="createDate != null">
+				create_date,
+			</if>
+			<if test="updateDate != null">
+				update_date,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="uuid != null">
+				#{uuid,jdbcType=VARCHAR},
+			</if>
+			<if test="championUserCode != null">
+				#{championUserCode,jdbcType=VARCHAR},
+			</if>
+			<if test="championNickName != null">
+				#{championNickName,jdbcType=VARCHAR},
+			</if>
+			<if test="allWeek != null">
+				#{allWeek,jdbcType=BIGINT},
+			</if>
+			<if test="secondUserCode != null">
+				#{secondUserCode,jdbcType=VARCHAR},
+			</if>
+			<if test="thirdUserCode != null">
+				#{thirdUserCode,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectCode != null">
+				#{subjectCode,jdbcType=VARCHAR},
+			</if>
+			<if test="gradeCode != null">
+				#{gradeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="volumeCode != null">
+				#{volumeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="unitCode != null">
+				#{unitCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fewWeek != null">
+				#{fewWeek,jdbcType=DOUBLE},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="WeeklyChart_update" parameterType="com.eeduspace.challenge.persist.po.WeeklyChart">
+		update weekly_chart
+		<set>
+			<if test="uuid != null">
+				uuid = #{uuid,jdbcType=VARCHAR},
+			</if>
+			<if test="championUserCode != null">
+				champion_user_code =
+				#{championUserCode,jdbcType=VARCHAR},
+			</if>
+			<if test="championNickName != null">
+				champion_nick_name =
+				#{championNickName,jdbcType=VARCHAR},
+			</if>
+			<if test="allWeek != null">
+				all_week = #{allWeek,jdbcType=BIGINT},
+			</if>
+			<if test="secondUserCode != null">
+				second_user_code = #{secondUserCode,jdbcType=VARCHAR},
+			</if>
+			<if test="thirdUserCode != null">
+				third_user_code = #{thirdUserCode,jdbcType=VARCHAR},
+			</if>
+			<if test="subjectCode != null">
+				subject_code = #{subjectCode,jdbcType=VARCHAR},
+			</if>
+			<if test="gradeCode != null">
+				grade_code = #{gradeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="volumeCode != null">
+				volume_code = #{volumeCode,jdbcType=VARCHAR},
+			</if>
+			<if test="unitCode != null">
+				unit_code = #{unitCode,jdbcType=VARCHAR},
+			</if>
+			<if test="fewWeek != null">
+				few_week = #{fewWeek,jdbcType=DOUBLE},
+			</if>
+			<if test="createDate != null">
+				create_date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				update_date = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.WeeklyChart">
+		update
+		weekly_chart
+		set uuid = #{uuid,jdbcType=VARCHAR},
+		champion_user_code =
+		#{championUserCode,jdbcType=VARCHAR},
+		champion_nick_name =
+		#{championNickName,jdbcType=VARCHAR},
+		all_week =
+		#{allWeek,jdbcType=BIGINT},
+		second_user_code =
+		#{secondUserCode,jdbcType=VARCHAR},
+		third_user_code =
+		#{thirdUserCode,jdbcType=VARCHAR},
+		subject_code =
+		#{subjectCode,jdbcType=VARCHAR},
+		grade_code =
+		#{gradeCode,jdbcType=VARCHAR},
+		volume_code =
+		#{volumeCode,jdbcType=VARCHAR},
+		unit_code =
+		#{unitCode,jdbcType=VARCHAR},
+		few_week = #{fewWeek,jdbcType=DOUBLE},
+		create_date = #{createDate,jdbcType=TIMESTAMP},
+		update_date =
+		#{updateDate,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=BIGINT}
+	</update>
+
+
+
+
+
+
+	<sql id="WeeklyChart_where_sql">
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="uuid != null">
+			and uuid = #{uuid}
+		</if>
+		<if test="championUserCode != null">
+			and champion_user_code = #{championUserCode}
+		</if>
+		<if test="championNickName != null">
+			and champion_nick_name = #{championNickName}
+		</if>
+		<if test="allWeek != null">
+			and all_week = #{allWeek}
+		</if>
+		<if test="secondUserCode != null">
+			and second_user_code = #{secondUserCode}
+		</if>
+		<if test="thirdUserCode != null">
+			and third_user_code = #{thirdUserCode}
+		</if>
+		<if test="subjectCode != null">
+			and subject_code = #{subjectCode}
+		</if>
+		<if test="gradeCode != null">
+			and grade_code = #{gradeCode}
+		</if>
+		<if test="volumeCode != null">
+			and volume_code = #{volumeCode}
+		</if>
+		<if test="unitCode != null">
+			and unit_code = #{unitCode}
+		</if>
+		<if test="fewWeek != null">
+			and few_week = #{fewWeek}
+		</if>
+		<if test="createDate != null">
+			and create_date = #{createDate}
+		</if>
+		<if test="updateDate != null">
+			and update_date = #{updateDate}
+		</if>
+	</sql>
+
+	<select id="WeeklyChart_findByPager" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM weekly_chart
+		<where>
+			<include refid="WeeklyChart_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+		<if test="orderProperty != null">
+			order by ${orderProperty} ${orderDirection}
+		</if>
+		<if test="start != null ">
+			<if test="start >= 0">
+				limit #{start}, #{limit}
+			</if>
+		</if>
+	</select>
+
+	<select id="WeeklyChart_findByPager_count" resultType="java.lang.Long">
+		select count(id) from weekly_chart
+		<where>
+			<include refid="WeeklyChart_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+	</select>
+
+
+
+	<!-- 获取上周周榜信息 -->
+	<select id="get_max_weeklychart" resultMap="BaseResultMap">
+		SELECT * FROM
+		weekly_chart where all_week=(SELECT MAX(all_week) FROM
+		weekly_chart
+		where subject_code=#{subjectCode} AND
+		grade_code=#{gradeCode});
+	</select>
+
+
+</mapper>

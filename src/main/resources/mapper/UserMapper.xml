@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.User">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_code" property="userCode" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="open_id" property="openId" jdbcType="VARCHAR"/>
+        <result column="access_key" property="accessKey" jdbcType="VARCHAR"/>
+        <result column="secret_key" property="secretKey" jdbcType="VARCHAR"/>
+        <result column="is_black" property="isBlack" jdbcType="INTEGER"/>
+        <result column="user_online_state" property="userOnlineState" jdbcType="INTEGER"/>
+        <result column="mac_address" property="macAddress" jdbcType="VARCHAR"/>
+        <result column="is_vip" property="isVip" jdbcType="INTEGER"/>
+        <result column="vip_start_date" property="vipStartDate" jdbcType="TIMESTAMP"/>
+        <result column="vip_end_date" property="vipEndDate" jdbcType="TIMESTAMP"/>
+        <result column="register_source" property="registerSource" jdbcType="VARCHAR"/>
+        <result column="fight_value" property="fightValue" jdbcType="BIGINT"/>
+        <result column="user_points" property="userPoints" jdbcType="BIGINT"/>
+        <result column="first" property="first" jdbcType="BIGINT"/>
+        <result column="second" property="second" jdbcType="BIGINT"/>
+        <result column="third" property="third" jdbcType="BIGINT"/>
+        <result column="equipment_type" property="equipmentType" jdbcType="VARCHAR"/>
+        <result column="user_info_degree" property="userInfoDegree" jdbcType="INTEGER"/>
+        <result column="channel_source" property="channelSource" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        <result column="week_status" property="weekStatus" jdbcType="DOUBLE" javaType="java.lang.Double"/>
+    </resultMap>
+    <resultMap id="BaseDetailResultMap" type="com.eeduspace.challenge.model.UserModel">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_code" property="userCode" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="is_black" property="isBlack" jdbcType="INTEGER"/>
+        <result column="user_online_state" property="userOnlineState" jdbcType="INTEGER"/>
+        <result column="mac_address" property="macAddress" jdbcType="VARCHAR"/>
+        <result column="is_vip" property="isVip" jdbcType="INTEGER"/>
+        <result column="vip_start_date" property="vipStartDate" jdbcType="TIMESTAMP"/>
+        <result column="vip_end_date" property="vipEndDate" jdbcType="TIMESTAMP"/>
+        <result column="register_source" property="registerSource" jdbcType="VARCHAR"/>
+        <result column="fight_value" property="fightValue" jdbcType="BIGINT"/>
+        <result column="user_points" property="userPoints" jdbcType="BIGINT"/>
+        <result column="first" property="first" jdbcType="BIGINT"/>
+        <result column="second" property="second" jdbcType="BIGINT"/>
+        <result column="third" property="third" jdbcType="BIGINT"/>
+        <result column="equipment_type" property="equipmentType" jdbcType="VARCHAR"/>
+        <result column="user_info_degree" property="userInfoDegree" jdbcType="INTEGER"/>
+        <result column="channel_source" property="channelSource" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+
+        <result column="school" property="school" jdbcType="VARCHAR"/>
+        <result column="head_img_url" property="headImgUrl" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR"/>
+
+        <result column="friend_rank" property="friendRank" jdbcType="VARCHAR"/>
+        <result column="fight_rank" property="fightRank" jdbcType="VARCHAR"/>
+        <result column="week_status" property="weekStatus" jdbcType="DOUBLE" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_code, user_name, mobile, email, is_black, user_online_state,mac_address, is_vip,
+    open_id,access_key,secret_key,
+    vip_start_date, vip_end_date, register_source, fight_value, user_points, first, second, 
+    third, equipment_type, user_info_degree, channel_source, create_date, update_date,week_status
+    </sql>
+    <sql id="Base_Detail_Column_List">
+        u.user_code, user_name, mobile, email, is_black, user_online_state, is_vip,
+        open_id,access_key,secret_key,
+        vip_start_date, vip_end_date, register_source, fight_value, user_points, first, second,
+        third, equipment_type, user_info_degree, channel_source, u.create_date, u.update_date,
+        school, head_img_url, sex, nick_name, birthday, grade, province,
+        city, area, country,week_status
+    </sql>
+    <sql id="Base_Friend_Column_List">
+        u.user_code, user_name, mobile, email, is_black, user_online_state, is_vip,
+        vip_start_date, vip_end_date, register_source, fight_value, user_points,
+        equipment_type, user_info_degree,head_img_url, sex, nick_name,week_status
+    </sql>
+<!--    <select id="createView">
+       create or replace view as user_view
+       select user_code,mobile, from
+    </select>-->
+    <select id="User_getById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="findByUserCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where user_code = #{userCode,jdbcType=VARCHAR}
+    </select>
+    <select id="User_userCode_getByValue" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where user_code = #{userCode,jdbcType=VARCHAR}
+    </select>
+    <select id="User_findDetailByUserCode" resultMap="BaseDetailResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Detail_Column_List"/>
+        from user u,user_info ud
+        where u.user_code = #{userCode,jdbcType=VARCHAR} and  u.user_code = ud.user_code
+    </select>
+    <select id="findByMobile" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where mobile = #{mobile,jdbcType=VARCHAR}
+    </select>
+
+    <sql id="User_save_sql">
+        <if test="userCode != null">
+            user_code = #{userCode,jdbcType=VARCHAR},
+        </if>
+        <if test="userName != null">
+            user_name = #{userName,jdbcType=VARCHAR},
+        </if>
+        <if test="mobile != null">
+            mobile = #{mobile,jdbcType=VARCHAR},
+        </if>
+        <if test="email != null">
+            email = #{email,jdbcType=VARCHAR},
+        </if>
+        <if test="password != null">
+            password = #{password,jdbcType=VARCHAR},
+        </if>
+        <if test="password != null">
+            secret_key = #{secretKey,jdbcType=VARCHAR},
+        </if>
+        <if test="password != null">
+            open_id = #{openId,jdbcType=VARCHAR},
+        </if>
+        <if test="password != null">
+            access_key = #{accessKey,jdbcType=VARCHAR},
+        </if>
+        <if test="isBlack != null">
+            is_black = #{isBlack,jdbcType=INTEGER},
+        </if>
+        <if test="userOnlineState != null">
+            user_online_state = #{userOnlineState,jdbcType=INTEGER},
+        </if>
+         <if test="macAddress != null">
+            mac_address = #{macAddress,jdbcType=VARCHAR},
+        </if>
+        <if test="isVip != null">
+            is_vip = #{isVip,jdbcType=INTEGER},
+        </if>
+        <if test="vipStartDate != null">
+            vip_start_date = #{vipStartDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="vipEndDate != null">
+            vip_end_date = #{vipEndDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="registerSource != null">
+            register_source = #{registerSource,jdbcType=VARCHAR},
+        </if>
+        <if test="fightValue != null">
+            fight_value = #{fightValue},
+        </if>
+        <if test="userPoints != null">
+            user_points = #{userPoints},
+        </if>
+        <if test="first != null">
+            first = #{first,jdbcType=BIGINT},
+        </if>
+        <if test="second != null">
+            second = #{second,jdbcType=BIGINT},
+        </if>
+        <if test="third != null">
+            third = #{third,jdbcType=BIGINT},
+        </if>
+        <if test="equipmentType != null">
+            equipment_type = #{equipmentType,jdbcType=VARCHAR},
+        </if>
+        <if test="userInfoDegree != null">
+            user_info_degree = #{userInfoDegree,jdbcType=INTEGER},
+        </if>
+        <if test="channelSource != null">
+            channel_source = #{channelSource,jdbcType=VARCHAR},
+        </if>
+        <if test="createDate != null">
+            create_date = #{createDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="updateDate != null">
+            update_date = #{updateDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="weekStatus != null">
+            week_status = #{weekStatus,jdbcType=DOUBLE},
+        </if>
+    </sql>
+    <sql id="User_where_sql">
+        <if test="userCode != null">
+            and user_code = #{userCode,jdbcType=VARCHAR}
+        </if>
+        <if test="userName != null">
+            and user_name = #{userName,jdbcType=VARCHAR}
+        </if>
+        <if test="mobile != null">
+            and mobile = #{mobile,jdbcType=VARCHAR}
+        </if>
+        <if test="email != null">
+            and  email = #{email,jdbcType=VARCHAR}
+        </if>
+        <if test="password != null">
+            and password = #{password,jdbcType=VARCHAR}
+        </if>
+        <if test="password != null">
+            and secret_key = #{secretKey,jdbcType=VARCHAR}
+        </if>
+        <if test="password != null">
+            and open_id = #{openId,jdbcType=VARCHAR}
+        </if>
+        <if test="password != null">
+            and  access_key = #{accessKey,jdbcType=VARCHAR}
+        </if>
+        <if test="isBlack != null">
+            and  is_black = #{isBlack,jdbcType=INTEGER}
+        </if>
+        <if test="userOnlineState != null">
+            and user_online_state = #{userOnlineState,jdbcType=INTEGER}
+        </if>
+        <if test="isVip != null">
+            and is_vip = #{isVip,jdbcType=INTEGER}
+        </if>
+        <if test="vipStartDate != null">
+            and vip_start_date = #{vipStartDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="vipEndDate != null">
+            and vip_end_date = #{vipEndDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="registerSource != null">
+            and  register_source = #{registerSource,jdbcType=VARCHAR}
+        </if>
+        <if test="fightValue != null">
+            and fight_value = #{fightValue}
+        </if>
+        <if test="userPoints != null">
+            and  user_points = #{userPoints}
+        </if>
+        <if test="first != null">
+            and  first = #{first,jdbcType=BIGINT}
+        </if>
+        <if test="second != null">
+            and  second = #{second,jdbcType=BIGINT}
+        </if>
+        <if test="third != null">
+            and third = #{third,jdbcType=BIGINT}
+        </if>
+        <if test="equipmentType != null">
+            and equipment_type = #{equipmentType,jdbcType=VARCHAR}
+        </if>
+        <if test="userInfoDegree != null">
+            and  user_info_degree = #{userInfoDegree,jdbcType=INTEGER}
+        </if>
+        <if test="channelSource != null">
+            and  channel_source = #{channelSource,jdbcType=VARCHAR}
+        </if>
+        <if test="createDate != null">
+            and create_date = #{createDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateDate != null">
+            and  update_date = #{updateDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="weekStatus != null">
+            week_status = #{weekStatus,jdbcType=DOUBLE},
+        </if>
+    </sql>
+
+    <select id="User_findByPager" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM user
+        <where>
+            <include refid="User_where_sql" />
+            <if test="searchProperty != null">
+                ${searchProperty} = #{searchValue}
+            </if>
+        </where>
+        <if test="orderProperty != null">
+            order by ${orderProperty} ${orderDirection}
+        </if>
+        <if test="start != null ">
+            <if test="start >= 0">
+                limit #{start}, #{limit}
+            </if>
+        </if>
+    </select>
+
+    <select id="User_findFriendByUserCode" resultMap="BaseDetailResultMap" parameterType="java.lang.String">
+<!--        select   <include refid="Base_Friend_Column_List"/>
+        from user u, user_info ud
+        where  u.user_code=ud.user_code and
+        u.user_code in (select uf.friend_code from user_friend uf where uf.my_user_code=#{userCode,jdbcType=VARCHAR})-->
+        select   <include refid="Base_Friend_Column_List"/>
+        from user u, user_info ud
+        where uf.my_user_code=#{userCode,jdbcType=VARCHAR} and ud.friend_code=u.user_code
+    </select>
+
+    <delete id="User_batch_deleteById" parameterType="java.lang.Long">
+        delete from user
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="User_save" keyProperty="id" useGeneratedKeys="true">
+    insert into user ( user_code, user_name,
+      mobile, email, password, open_id,access_key,secret_key,
+      is_black, user_online_state, mac_address, is_vip, 
+      vip_start_date, vip_end_date, register_source, 
+      fight_value, user_points, first, 
+      second, third, equipment_type, 
+      user_info_degree, channel_source, create_date, 
+      update_date,week_status)
+    values (#{userCode,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+      #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+      #{openId,jdbcType=VARCHAR}, #{accessKey,jdbcType=VARCHAR}, #{secretKey,jdbcType=VARCHAR},
+      #{isBlack,jdbcType=INTEGER}, #{userOnlineState,jdbcType=INTEGER}, #{macAddress,jdbcType=VARCHAR}, #{isVip,jdbcType=INTEGER}, 
+      #{vipStartDate,jdbcType=TIMESTAMP}, #{vipEndDate,jdbcType=TIMESTAMP}, #{registerSource,jdbcType=VARCHAR}, 
+      #{fightValue,jdbcType=DOUBLE}, #{userPoints,jdbcType=DOUBLE}, #{first,jdbcType=BIGINT}, 
+      #{second,jdbcType=BIGINT}, #{third,jdbcType=BIGINT}, #{equipmentType,jdbcType=VARCHAR}, 
+      #{userInfoDegree,jdbcType=INTEGER}, #{channelSource,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP},#{weekStatus,jdbcType=DOUBLE})
+  </insert>
+    <insert id="User_save_P" useGeneratedKeys="true" keyProperty="id">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <include refid="User_save_sql" />
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="userCode != null">
+                #{userCode,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+
+            <if test="openId != null">
+                #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="accessKey != null">
+                #{accessKey,jdbcType=VARCHAR},
+            </if>
+            <if test="secretKey != null">
+                #{secretKey,jdbcType=VARCHAR},
+            </if>
+
+            <if test="isBlack != null">
+                #{isBlack,jdbcType=INTEGER},
+            </if>
+            <if test="userOnlineState != null">
+                #{userOnlineState,jdbcType=INTEGER},
+            </if>
+            <if test="isVip != null">
+                #{isVip,jdbcType=INTEGER},
+            </if>
+            <if test="vipStartDate != null">
+                #{vipStartDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="vipEndDate != null">
+                #{vipEndDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="registerSource != null">
+                #{registerSource,jdbcType=VARCHAR},
+            </if>
+            <if test="fightValue != null">
+                #{fightValue,jdbcType=DOUBLE},
+            </if>
+            <if test="userPoints != null">
+                #{userPoints,jdbcType=DOUBLE},
+            </if>
+            <if test="first != null">
+                #{first,jdbcType=BIGINT},
+            </if>
+            <if test="second != null">
+                #{second,jdbcType=BIGINT},
+            </if>
+            <if test="third != null">
+                #{third,jdbcType=BIGINT},
+            </if>
+            <if test="equipmentType != null">
+                #{equipmentType,jdbcType=VARCHAR},
+            </if>
+            <if test="userInfoDegree != null">
+                #{userInfoDegree,jdbcType=INTEGER},
+            </if>
+            <if test="channelSource != null">
+                #{channelSource,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+             <if test="weekStatus != null">
+                #{weekStatus,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.eeduspace.challenge.persist.po.User">
+        update user
+        <set>
+            <include refid="User_save_sql" />
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="User_update" parameterType="com.eeduspace.challenge.persist.po.User">
+    update user
+    set user_code = #{userCode,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      is_black = #{isBlack,jdbcType=INTEGER},
+      user_online_state = #{userOnlineState,jdbcType=INTEGER},
+      mac_address = #{macAddress,jdbcType=VARCHAR},
+      is_vip = #{isVip,jdbcType=INTEGER},
+      vip_start_date = #{vipStartDate,jdbcType=TIMESTAMP},
+      vip_end_date = #{vipEndDate,jdbcType=TIMESTAMP},
+      register_source = #{registerSource,jdbcType=VARCHAR},
+      fight_value = #{fightValue},
+      user_points = #{userPoints},
+      first = #{first,jdbcType=BIGINT},
+      second = #{second,jdbcType=BIGINT},
+      third = #{third,jdbcType=BIGINT},
+      equipment_type = #{equipmentType,jdbcType=VARCHAR},
+      user_info_degree = #{userInfoDegree,jdbcType=INTEGER},
+      channel_source = #{channelSource,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      week_status = #{weekStatus,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <!-- 设置好友排名排名变量 -->
+    <select id="User_set_friend_rank" resultType="String">
+        set @friendRank=0;
+    </select>
+    <!-- 设置战斗力排名排名变量 -->
+    <select id="User_set_fight_rank" resultType="String">
+        set @fightRank=0;
+    </select>
+<!--获取好友排名-->
+    <select id="User_getFriendBankByUserCode" resultMap="BaseDetailResultMap" parameterType="java.lang.String">
+	select A.friend_rank ,A.user_code,A.fight_value
+        from(
+		   (select  us.fight_value,@friendRank:=@friendRank+1 as friend_rank,us.user_code
+		   from
+			 (select u.* FROM user u,user_friend ud where ud.my_user_code=#{userCode} and ud.friend_code=u.user_code) as us
+		    order by us.fight_value desc ,us.create_date ) as A
+		   ) ,(SELECT @friendRank:=0) r where A.user_code=#{userCode};
+    </select>
+<!--获取战斗力排名-->
+    <select id="User_getFightBankByUserCode" resultMap="BaseDetailResultMap" parameterType="java.lang.String">
+        select A.fight_rank ,A.user_code,A.fight_value
+        from(
+		   (select  u.fight_value,@fightRank:=@fightRank+1 as fight_rank,u.user_code from user u order by u.fight_value desc ,u.create_date) as A
+		   ) ,(SELECT @fightRank:=0) r where A.user_code=#{userCode}
+    </select>
+	<!-- 战斗次数清零 -->
+    <update id="Update_weekStatus">
+    	udpate user set week_status=0;
+    </update>
+	
+	<select id="findUserInfoByMobile" resultMap="BaseDetailResultMap">
+    	SELECT <include refid="Base_Detail_Column_List"/>
+    	FROM `user` u JOIN user_info ui
+		WHERE u.user_code = ui.user_code and u.mobile = #{mobile}
+    </select>
+</mapper>

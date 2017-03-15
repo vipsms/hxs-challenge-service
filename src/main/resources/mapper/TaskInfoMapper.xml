@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.TaskInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.TaskInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="task_name" property="taskName" jdbcType="VARCHAR" />
+    <result column="task_type" property="taskType" jdbcType="VARCHAR" />
+    <result column="task_describe" property="taskDescribe" jdbcType="VARCHAR" />
+    <result column="concrete_task_uuid" property="concreteTaskUuid" jdbcType="VARCHAR" />
+    <result column="task_creator" property="taskCreator" jdbcType="VARCHAR" />
+    <result column="task_creator_code" property="taskCreatorCode" jdbcType="VARCHAR" />
+    <result column="concrete_task_code" property="concreteTaskCode" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+    <resultMap id="BaseModelResultMap" type="com.eeduspace.challenge.model.TaskInfoModel" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+        <result column="task_name" property="taskName" jdbcType="VARCHAR" />
+        <result column="task_type" property="taskType" jdbcType="VARCHAR" />
+        <result column="task_describe" property="taskDescribe" jdbcType="VARCHAR" />
+        <result column="concrete_task_uuid" property="concreteTaskUuid" jdbcType="VARCHAR" />
+        <result column="task_creator" property="taskCreator" jdbcType="VARCHAR" />
+        <result column="task_creator_code" property="taskCreatorCode" jdbcType="VARCHAR" />
+        <result column="concrete_task_code" property="concreteTaskCode" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+        <result column="reward_point" property="rewardPoint" jdbcType="DOUBLE" />
+        <result column="completion_times" property="completionTimes" jdbcType="DOUBLE" />
+        <result column="vip_reward_point" property="vipRewardPoint" jdbcType="DOUBLE" />
+    </resultMap>
+  <sql id="Base_Column_List" >
+    id, uuid, task_name, task_type, task_describe, concrete_task_uuid, task_creator, 
+    task_creator_code, concrete_task_code, create_date, update_date
+  </sql>
+    <sql id="Base_Column_Model" >
+        t.id, t.uuid, t.task_name, t.task_type, t.task_describe, t.concrete_task_uuid, t.task_creator,
+        t.task_creator_code, t.concrete_task_code, t.create_date, t.update_date,
+        tr.reward_point,tr.completion_times,tr.vip_reward_point
+    </sql>
+  <select id="TaskInfo_getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from task_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="TaskInfo_deleteById" parameterType="java.lang.Long" >
+    delete from task_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="TaskInfo_save" parameterType="com.eeduspace.challenge.persist.po.TaskInfo" >
+    insert into task_info (id, uuid, task_name, 
+      task_type, task_describe, concrete_task_uuid, 
+      task_creator, task_creator_code, concrete_task_code, 
+      create_date, update_date)
+    values (#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR}, #{taskName,jdbcType=VARCHAR}, 
+      #{taskType,jdbcType=VARCHAR}, #{taskDescribe,jdbcType=VARCHAR}, #{concreteTaskUuid,jdbcType=VARCHAR}, 
+      #{taskCreator,jdbcType=VARCHAR}, #{taskCreatorCode,jdbcType=VARCHAR}, #{concreteTaskCode,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.TaskInfo" >
+    insert into task_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="taskName != null" >
+        task_name,
+      </if>
+      <if test="taskType != null" >
+        task_type,
+      </if>
+      <if test="taskDescribe != null" >
+        task_describe,
+      </if>
+      <if test="concreteTaskUuid != null" >
+        concrete_task_uuid,
+      </if>
+      <if test="taskCreator != null" >
+        task_creator,
+      </if>
+      <if test="taskCreatorCode != null" >
+        task_creator_code,
+      </if>
+      <if test="concreteTaskCode != null" >
+        concrete_task_code,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null" >
+        #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null" >
+        #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="taskDescribe != null" >
+        #{taskDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="concreteTaskUuid != null" >
+        #{concreteTaskUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="taskCreator != null" >
+        #{taskCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="taskCreatorCode != null" >
+        #{taskCreatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="concreteTaskCode != null" >
+        #{concreteTaskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="TaskInfo_update" parameterType="com.eeduspace.challenge.persist.po.TaskInfo" >
+    update task_info
+    <set >
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="taskName != null" >
+        task_name = #{taskName,jdbcType=VARCHAR},
+      </if>
+      <if test="taskType != null" >
+        task_type = #{taskType,jdbcType=VARCHAR},
+      </if>
+      <if test="taskDescribe != null" >
+        task_describe = #{taskDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="concreteTaskUuid != null" >
+        concrete_task_uuid = #{concreteTaskUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="taskCreator != null" >
+        task_creator = #{taskCreator,jdbcType=VARCHAR},
+      </if>
+      <if test="taskCreatorCode != null" >
+        task_creator_code = #{taskCreatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="concreteTaskCode != null" >
+        concrete_task_code = #{concreteTaskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.TaskInfo" >
+    update task_info
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      task_name = #{taskName,jdbcType=VARCHAR},
+      task_type = #{taskType,jdbcType=VARCHAR},
+      task_describe = #{taskDescribe,jdbcType=VARCHAR},
+      concrete_task_uuid = #{concreteTaskUuid,jdbcType=VARCHAR},
+      task_creator = #{taskCreator,jdbcType=VARCHAR},
+      task_creator_code = #{taskCreatorCode,jdbcType=VARCHAR},
+      concrete_task_code = #{concreteTaskCode,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+    <sql id="TaskInfo_where_sql">
+        <if test="uuid != null" >
+            and  uuid = #{uuid,jdbcType=VARCHAR}
+        </if>
+        <if test="taskName != null" >
+            and task_name = #{taskName,jdbcType=VARCHAR}
+        </if>
+        <if test="taskType != null" >
+            and task_type = #{taskType,jdbcType=VARCHAR}
+        </if>
+        <if test="taskDescribe != null" >
+            and task_describe = #{taskDescribe,jdbcType=VARCHAR}
+        </if>
+        <if test="concreteTaskUuid != null" >
+            and concrete_task_uuid = #{concreteTaskUuid,jdbcType=VARCHAR}
+        </if>
+        <if test="taskCreator != null" >
+            and task_creator = #{taskCreator,jdbcType=VARCHAR}
+        </if>
+        <if test="taskCreatorCode != null" >
+            and task_creator_code = #{taskCreatorCode,jdbcType=VARCHAR}
+        </if>
+        <if test="concreteTaskCode != null" >
+            and concrete_task_code = #{concreteTaskCode,jdbcType=VARCHAR}
+        </if>
+        <if test="createDate != null" >
+            and create_date = #{createDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateDate != null" >
+           and update_date = #{updateDate,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+
+    <select id="TaskInfo_findByPager" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM task_info
+        <where>
+            <include refid="TaskInfo_where_sql" />
+            <if test="searchProperty != null">
+                ${searchProperty} = #{searchValue}
+            </if>
+        </where>
+        <if test="orderProperty != null">
+            order by ${orderProperty} ${orderDirection}
+        </if>
+        <if test="start != null ">
+            <if test="start >= 0">
+                limit #{start}, #{limit}
+            </if>
+        </if>
+    </select>
+
+
+    <select id="TaskInfo_findByType" resultMap="BaseModelResultMap">
+        SELECT
+        <include refid="Base_Column_Model" />
+        FROM task_info t,task_rule tr where t.task_type=#{taskType} and t.concrete_task_code=#{concreteTaskCode} and t.uuid=tr.task_info_uuid
+
+    </select>
+</mapper>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.ConcreteTaskMapper" >
+  <resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.ConcreteTask" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="concrete_task_name" property="concreteTaskName" jdbcType="VARCHAR" />
+    <result column="concrete_task_code" property="concreteTaskCode" jdbcType="VARCHAR" />
+    <result column="concrete_task_desc" property="concreteTaskDesc" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uuid, concrete_task_name, concrete_task_code, concrete_task_desc, create_date, 
+    update_date
+  </sql>
+  <select id="ConcreteTask_getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from concrete_task
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="ConcreteTask_deleteById" parameterType="java.lang.Long" >
+    delete from concrete_task
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="ConcreteTask_save" parameterType="com.eeduspace.challenge.persist.po.ConcreteTask" >
+    insert into concrete_task (id, uuid, concrete_task_name, 
+      concrete_task_code, concrete_task_desc, create_date, 
+      update_date)
+    values (#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR}, #{concreteTaskName,jdbcType=VARCHAR}, 
+      #{concreteTaskCode,jdbcType=VARCHAR}, #{concreteTaskDesc,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.ConcreteTask" >
+    insert into concrete_task
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="concreteTaskName != null" >
+        concrete_task_name,
+      </if>
+      <if test="concreteTaskCode != null" >
+        concrete_task_code,
+      </if>
+      <if test="concreteTaskDesc != null" >
+        concrete_task_desc,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="concreteTaskName != null" >
+        #{concreteTaskName,jdbcType=VARCHAR},
+      </if>
+      <if test="concreteTaskCode != null" >
+        #{concreteTaskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="concreteTaskDesc != null" >
+        #{concreteTaskDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="ConcreteTask_update" parameterType="com.eeduspace.challenge.persist.po.ConcreteTask" >
+    update concrete_task
+    <set >
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="concreteTaskName != null" >
+        concrete_task_name = #{concreteTaskName,jdbcType=VARCHAR},
+      </if>
+      <if test="concreteTaskCode != null" >
+        concrete_task_code = #{concreteTaskCode,jdbcType=VARCHAR},
+      </if>
+      <if test="concreteTaskDesc != null" >
+        concrete_task_desc = #{concreteTaskDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.ConcreteTask" >
+    update concrete_task
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      concrete_task_name = #{concreteTaskName,jdbcType=VARCHAR},
+      concrete_task_code = #{concreteTaskCode,jdbcType=VARCHAR},
+      concrete_task_desc = #{concreteTaskDesc,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+    <sql id="ConcreteTask_where_sql">
+        <if test="uuid != null" >
+            and uuid = #{uuid,jdbcType=VARCHAR}
+        </if>
+        <if test="concreteTaskName != null" >
+            and concrete_task_name = #{concreteTaskName,jdbcType=VARCHAR}
+        </if>
+        <if test="concreteTaskCode != null" >
+            and concrete_task_code = #{concreteTaskCode,jdbcType=VARCHAR}
+        </if>
+        <if test="concreteTaskDesc != null" >
+            and concrete_task_desc = #{concreteTaskDesc,jdbcType=VARCHAR}
+        </if>
+        <if test="createDate != null" >
+            and create_date = #{createDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateDate != null" >
+           and update_date = #{updateDate,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+
+    <select id="ConcreteTask_findByPager" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM concrete_task
+        <where>
+            <include refid="ConcreteTask_where_sql" />
+            <if test="searchProperty != null">
+                ${searchProperty} = #{searchValue}
+            </if>
+        </where>
+        <if test="orderProperty != null">
+            order by ${orderProperty} ${orderDirection}
+        </if>
+        <if test="start != null ">
+            <if test="start >= 0">
+                limit #{start}, #{limit}
+            </if>
+        </if>
+    </select>
+</mapper>

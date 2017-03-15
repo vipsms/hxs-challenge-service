@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.SignRuleMapper" >
+  <resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.SignRule" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="sign_times" property="signTimes" jdbcType="DOUBLE" />
+    <result column="vip_reward_points" property="vipRewardPoints" jdbcType="DOUBLE" />
+    <result column="reward_points" property="rewardPoints" jdbcType="DOUBLE" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uuid, sign_times, reward_points, vip_reward_points,create_date, update_date
+  </sql>
+  <select id="SignRule_getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sign_rule
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="SignRule_deleteById" parameterType="java.lang.Long" >
+    delete from sign_rule
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="SignRule_save" parameterType="com.eeduspace.challenge.persist.po.SignRule" >
+    insert into sign_rule (id, uuid, sign_times, 
+      reward_points, vip_reward_points,create_date, update_date
+      )
+    values (#{id,jdbcType=BIGINT}, #{uuid,jdbcType=VARCHAR}, #{signTimes,jdbcType=DOUBLE},
+      #{vipRewardPoints,jdbcType=DOUBLE},
+      #{rewardPoints,jdbcType=DOUBLE}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.SignRule" >
+    insert into sign_rule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="signTimes != null" >
+        sign_times,
+      </if>
+      <if test="rewardPoints != null" >
+        reward_points,
+      </if>
+      <if test="vipRewardPoints != null" >
+        vip_reward_points,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="signTimes != null" >
+        #{signTimes,jdbcType=DOUBLE},
+      </if>
+      <if test="rewardPoints != null" >
+        #{rewardPoints,jdbcType=DOUBLE},
+      </if>
+        <if test="vipRewardPoints != null" >
+        #{vipRewardPoints,jdbcType=DOUBLE},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="SignRule_update" parameterType="com.eeduspace.challenge.persist.po.SignRule" >
+    update sign_rule
+    <set >
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="signTimes != null" >
+        sign_times = #{signTimes,jdbcType=DOUBLE},
+      </if>
+      <if test="rewardPoints != null" >
+        reward_points = #{rewardPoints,jdbcType=DOUBLE},
+      </if>
+      <if test="vipRewardPoints != null" >
+        vip_reward_points = #{vipRewardPoints,jdbcType=DOUBLE},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.eeduspace.challenge.persist.po.SignRule" >
+    update sign_rule
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      sign_times = #{signTimes,jdbcType=DOUBLE},
+      reward_points = #{rewardPoints,jdbcType=DOUBLE},
+      vip_reward_points = #{vipRewardPoints,jdbcType=DOUBLE},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+
+    <sql id="SignRule_where_sql">
+        <if test="uuid != null" >
+           and uuid = #{uuid,jdbcType=VARCHAR}
+        </if>
+        <if test="signTimes != null" >
+            and sign_times = #{signTimes,jdbcType=DOUBLE}
+        </if>
+        <if test="rewardPoints != null" >
+            and reward_points = #{rewardPoints,jdbcType=DOUBLE}
+        </if>
+        <if test="vipRewardPoints != null" >
+            and vip_reward_points = #{vipRewardPoints,jdbcType=DOUBLE}
+        </if>
+        <if test="createDate != null" >
+            and create_date = #{createDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateDate != null" >
+            and update_date = #{updateDate,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+
+    <select id="SignRule_findByPager" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM sign_rule
+        <where>
+            <include refid="SignRule_where_sql" />
+            <if test="searchProperty != null">
+                ${searchProperty} = #{searchValue}
+            </if>
+        </where>
+        <if test="orderProperty != null">
+            order by ${orderProperty} ${orderDirection}
+        </if>
+        <if test="start != null ">
+            <if test="start >= 0">
+                limit #{start}, #{limit}
+            </if>
+        </if>
+    </select>
+</mapper>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eeduspace.challenge.persist.dao.OrderItemMapper" >
+  <resultMap id="BaseResultMap" type="com.eeduspace.challenge.persist.po.OrderItem" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="uuid" property="uuid" jdbcType="VARCHAR" />
+    <result column="order_uuid" property="orderUuid" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_uuid" property="productUuid" jdbcType="VARCHAR" />
+    <result column="quantity" property="quantity" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uuid, order_uuid, product_name, product_uuid, quantity, price, create_date, update_date
+  </sql>
+  <select id="OrderItem_getById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hxs_order_item
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="OrderItem_deleteById" parameterType="java.lang.Long" >
+    delete from hxs_order_item
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="OrderItem_save"  keyProperty="id" useGeneratedKeys="true" >
+    insert into hxs_order_item ( uuid, order_uuid, 
+      product_name, product_uuid, quantity, 
+      price, create_date, update_date
+      )
+    values ( #{uuid,jdbcType=VARCHAR}, #{orderUuid,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{productUuid,jdbcType=VARCHAR}, #{quantity,jdbcType=VARCHAR}, 
+      #{price,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.eeduspace.challenge.persist.po.OrderItem" >
+    insert into hxs_order_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uuid != null" >
+        uuid,
+      </if>
+      <if test="orderUuid != null" >
+        order_uuid,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="productUuid != null" >
+        product_uuid,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="uuid != null" >
+        #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderUuid != null" >
+        #{orderUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productUuid != null" >
+        #{productUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.eeduspace.challenge.persist.po.OrderItem" >
+    update hxs_order_item
+    <set >
+      <if test="uuid != null" >
+        uuid = #{uuid,jdbcType=VARCHAR},
+      </if>
+      <if test="orderUuid != null" >
+        order_uuid = #{orderUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productUuid != null" >
+        product_uuid = #{productUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="OrderItem_update" parameterType="com.eeduspace.challenge.persist.po.OrderItem" >
+    update hxs_order_item
+    set uuid = #{uuid,jdbcType=VARCHAR},
+      order_uuid = #{orderUuid,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      product_uuid = #{productUuid,jdbcType=VARCHAR},
+      quantity = #{quantity,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+    <sql id="OrderItem_where_sql">
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="uuid != null">
+			and uuid = #{uuid}
+		</if>
+		<if test="orderUuid != null">
+			and order_uuid = #{orderUuid}
+		</if>
+		<if test="productName != null">
+			and product_name = #{productName}
+		</if>
+		<if test="productUuid != null">
+			and product_uuid = #{productUuid}
+		</if>
+		<if test="quantity != null">
+			and quantity = #{quantity}
+		</if>
+		<if test="price != null">
+			and price = #{price}
+		</if>
+		<if test="createDate != null">
+			and create_date = #{createDate}
+		</if>
+		<if test="updateDate != null">
+			and  update_date= #{updateDate}
+		</if>
+	</sql>
+     <select id="OrderItem_findByPager" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM hxs_order_item
+		<where>
+			<include refid="OrderItem_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+		<if test="orderProperty != null">
+			order by ${orderProperty} ${orderDirection}
+		</if>
+		<if test="start != null ">
+			<if test="start >= 0">
+				limit #{start}, #{limit}
+			</if>
+		</if>
+	</select>
+
+	<select id="OrderItem_findByPager_count" resultType="java.lang.Long">
+		select count(id) from hxs_order_item
+		<where>
+			<include refid="OrderItem_where_sql" />
+			<if test="searchProperty != null">
+				${searchProperty} = #{searchValue}
+			</if>
+		</where>
+	</select>
+  
+</mapper>
